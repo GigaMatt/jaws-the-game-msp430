@@ -2,7 +2,7 @@
 ## Overvuew
 The objective for this project is to use the MSP430 Microcontroller and our creativity to design a Chritmas Toy. Each MSP430 board is equipped with buttons, an LCD, LEDs, and a speaker. Utilizing these features and our knowledge of I/O, develop a game for the LCD screen.
 
-![Baby-Yoda-Meme](/download.jpeg)
+![Baby-Yoda-Meme](/extras/download.jpeg)
 
 
 
