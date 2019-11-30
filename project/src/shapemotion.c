@@ -236,7 +236,6 @@ void wdt_c_handler()
   if (count == 15)
   {
     mlAdvance(&ml1, &fieldFence);
-    // mlAdvance(&
     if (p2sw_read())
       redrawScreen = 1;
     count = 0;

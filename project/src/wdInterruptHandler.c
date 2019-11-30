@@ -21,6 +21,5 @@ void
     }
     sm_fast_clock();
     sm_update_led();
-
     led_update();
 }
