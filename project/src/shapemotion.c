@@ -18,45 +18,60 @@
 
 #define GREEN_LED BIT6
 
-int abSlicedRectCheck(const AbRect *rect, const Vec2 *centerPos, const Vec2 *pixel)
+/* Defined Modified Shapes for Shark*/
+
+int abSlicedArrowCheck(const AbRArrow *shape, const Vec2 *center_position, const Vec2 *pixel)
 {
-  Vec2 relPos;
-  vec2Sub(&relPos, pixel, centerPos);
-  if (relPos.axes[1] <= 4 && relPos.axes[1] / 2 < relPos.axes[2])
+  // Arrow for Shark Head
+
+  Vec2 relative_position;
+  vec2Sub(&relative_position, pixel, center_position);
+  if (relative_position.axes[1] >= -6 && relative_position.axes[0] / 2 < relative_position.axes[1])
     return 0;
   else
-    return abRectCheck(rect, centerPos, pixel);
+    return abRArrowCheck(shape, center_position, pixel);
 }
-int abSlicedArrowCheck(const AbRArrow *shape, const Vec2 *centerPos, const Vec2 *pixel)
+
+int abSlicedRectCheck(const AbRect *rect, const Vec2 *center_position, const Vec2 *pixel)
 {
-  Vec2 relPos;
-  vec2Sub(&relPos, pixel, centerPos);
-  if (relPos.axes[1] >= -6 && relPos.axes[0] / 2 < relPos.axes[1])
+  // Rectangle for Shark Fin
+
+  Vec2 relative_position;
+  vec2Sub(&relative_position, pixel, center_position);
+  if (relative_position.axes[1] <= 4 && relative_position.axes[1] / 2 < relative_position.axes[2])
     return 0;
   else
-    return abRArrowCheck(shape, centerPos, pixel);
+    return abRectCheck(rect, center_position, pixel);
 }
 
-AbRect rect10 = {abRectGetBounds, abSlicedRectCheck, {10, 10}}; /**< 10x10 rectangle */
-AbRArrow rightArrow = {abRArrowGetBounds, abSlicedArrowCheck, 30};
+//  Build Objects
+AbRect rectangle_size_10 = {abRectGetBounds, abSlicedRectCheck, {10, 10}}; /**< 10x10 rectangle */
+AbRect rectangle_size_7 = {abRectGetBounds, abSlicedRectCheck, {7, 7}};    /**< 7x7 human rectangle */
+AbRArrow right_arrow = {abRArrowGetBounds, abSlicedArrowCheck, 30};
 
-AbRectOutline fieldOutline = {/* playing field */
-                              abRectOutlineGetBounds,
-                              abRectOutlineCheck,
-                              {screenWidth / 2 - 10, screenHeight / 2 - 15}};
+AbRectOutline boder_outline = {
+    // Define Border Outline
 
+    abRectOutlineGetBounds,
+    abRectOutlineCheck,
+    {screenWidth / 2 - 10, screenHeight / 2 - 15}};
+
+/* Define Layers for objects */
 Layer layer4 = {
-    (AbShape *)&rightArrow,
+    // Lower Shark
+
+    (AbShape *)&right_arrow,
     {(screenWidth / 2) + 5, (screenHeight / 2) + 5}, /**< bit below & right of center */
     {0, 0},
     {0, 0}, /* last & next pos */
-    COLOR_YELLOW,
+    COLOR_RED,
     0,
 };
 
 Layer layer3 = {
-    /**< Layer with an orange circle */
-    (AbShape *)&rightArrow,
+    // Upper Shark
+
+    (AbShape *)&right_arrow,
     {(screenWidth / 2) + 10, (screenHeight / 2) + 61}, /**< bit below & right of center */
     {0, 0},
     {0, 0}, /* last & next pos */
@@ -64,34 +79,46 @@ Layer layer3 = {
     &layer4,
 };
 
-Layer fieldLayer = {/* playing field as a layer */
-                    (AbShape *)&fieldOutline,
-                    {screenWidth / 2, (screenHeight / 2)}, /**< center */
-                    {0, 0},
-                    {0, 0}, /* last & next pos */
-                    COLOR_BROWN,
-                    &layer3};
+Layer border_field_layer = {
+    // Border Outline
+    (AbShape *)&boder_outline,
+    {screenWidth / 2, (screenHeight / 2)}, /**< center */
+    {0, 0},
+    {0, 0}, /* last & next pos */
+    COLOR_BROWN,
+    &layer3};
 
 Layer layer1 = {
-    /**< Layer with a red square */
-    (AbShape *)&rect10,
+    // Swimming Human
+    (AbShape *)&rectangle_size_10,                 // Human as
     {screenWidth / 2 + 40, screenHeight / 2 + 51}, /**< center */
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_BROWN,
-    &fieldLayer,
+    &border_field_layer,
 };
 
 Layer layer0 = {
-    /**< Layer with an orange circle */
-    (AbShape *)&circle14,
-    {(screenWidth / 2) + 10, (screenHeight / 2) + 7}, /**< bit below & right of center */
+    // Innocent Seal
+    (AbShape *)&rectangle_size_7,
+    {screenWidth / 2 + 40, screenHeight / 2 + 51}, /**< center */
     {0, 0},
     {0, 0}, /* last & next pos */
-    COLOR_YELLOW,
+    COLOR_WHITE,
     &layer1,
 };
 
+// Layer layer0 = {
+//     /** Layer with an yellow circle */
+//     (AbShape *)&circle14,
+//     {(screenWidth / 2) + 10, (screenHeight / 2) + 7}, /**< bit below & right of center */
+//     {0, 0},
+//     {0, 0}, /* last & next pos */
+//     COLOR_YELLOW,
+//     &layer1,
+// };
+
+////////////////////////////////////////////////////////////////////////////////
 /** Moving Layer
  *  Linked list of layer references
  *  Velocity represents one iteration of change (direction & magnitude)
@@ -134,7 +161,7 @@ void movLayerDraw(MovLayer *movLayers, Layer *layers)
       for (col = bounds.topLeft.axes[0]; col <= bounds.botRight.axes[0]; col++)
       {
         Vec2 pixelPos = {col, row};
-        u_int color = bgColor;
+        u_int color = background_color;
         Layer *probeLayer;
         for (probeLayer = layers; probeLayer;
              probeLayer = probeLayer->next)
@@ -153,11 +180,7 @@ void movLayerDraw(MovLayer *movLayers, Layer *layers)
 
 //Region fence = {{10,30}, {SHORT_EDGE_PIXELS-10, LONG_EDGE_PIXELS-10}}; /**< Create a fence region */
 
-/** Advances a moving shape within a fence
- *  
- *  \param ml The moving shape to be advanced
- *  \param fence The region which will serve as a boundary for ml
- */
+/* SYSTEM MOVES THE SHARKS WITHIN THE DEFINED FENCE */
 void mlAdvance(MovLayer *ml, Region *fence)
 {
   Vec2 newPos;
@@ -176,13 +199,13 @@ void mlAdvance(MovLayer *ml, Region *fence)
         velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
         if (velocity < 0)
         {
-          drawString5x7(20, 35, "NOM NOM NOM NOM ", COLOR_RED, COLOR_BLUE);
+          drawString5x7(20, 35, "SHARK WEEK, BABY", COLOR_RED, COLOR_BLUE); //prev 5x7
           buzzer_set_period(1000);
           newPos.axes[axis] += (2 * velocity);
         }
         if (velocity > 0)
         {
-          drawString5x7(20, 35, "OH NO SHARK    ", COLOR_RED, COLOR_BLUE);
+          drawString5x7(20, 35, "IT'S A BAD WEEK TO BE A SEAL", COLOR_RED, COLOR_BLUE); //prev 5x7
         }
       } /**< if outside of fence */
     }   /**< for axis */
@@ -191,23 +214,46 @@ void mlAdvance(MovLayer *ml, Region *fence)
   } /**< for ml */
 }
 
-u_int bgColor = COLOR_BLUE; /**< The background color */
-int redrawScreen = 1;       /**< Boolean for whether screen needs to be redrawn */
+// System Sets Background Color
+u_int background_color = COLOR_GREEN; /**< The background color */
+int redrawScreen = 1;                 /**< Boolean for whether screen needs to be redrawn */
 
 Region fieldFence; /**< fence around playing field  */
 
-drawString5x7(41, 6, "Shark Game", COLOR_WHITE, COLOR_BLUE);
-for (;;)
+void main()
 {
-  while (!redrawScreen)
-  {                      /**< Pause CPU if screen doesn't need updating */
-    P1OUT &= ~GREEN_LED; /**< Green led off witHo CPU */
-    or_sr(0x10);         /**< CPU OFF */
+  P1DIR |= GREEN_LED; /**< Green led on when CPU on */
+  P1OUT |= GREEN_LED;
+
+  configureClocks();
+  lcd_init();
+  shapeInit();
+  p2sw_init(1);
+
+  shapeInit();
+
+  layerInit(&layer1);
+  layerDraw(&layer1);
+
+  buzzer_init();
+
+  layerGetBounds(&fieldLayer, &fieldFence);
+
+  enableWDTInterrupts(); /**< enable periodic interrupt */
+  or_sr(0x8);            /**< GIE (enable interrupts) */
+
+  drawString5x7(41, 6, "JAWS", COLOR_WHITE, COLOR_BLUE);
+  for (;;)
+  {
+    while (!redrawScreen)
+    {                      /**< Pause CPU if screen doesn't need updating */
+      P1OUT &= ~GREEN_LED; /**< Green led off witHo CPU */
+      or_sr(0x10);         /**< CPU OFF */
+    }
+    P1OUT |= GREEN_LED; /**< Green led on when CPU on */
+    redrawScreen = 0;
+    movLayerDraw(&ml0, &layer0);
   }
-  P1OUT |= GREEN_LED; /**< Green led on when CPU on */
-  redrawScreen = 0;
-  movLayerDraw(&ml0, &layer0);
-}
 }
 
 /** Watchdog timer interrupt handler. 15 interrupts/sec */
@@ -216,7 +262,7 @@ void decisecond()
   static char cnt = 0;
   if (++cnt > 2)
   {
-    buzzer_advance_frequency();
+    buzzer_play_sound();
     cnt = 0;
   }
 }
@@ -226,7 +272,7 @@ void wdt_c_handler()
   static char second_count = 0, decisecond_count = 0;
   if (++decisecond_count == 25)
   {
-    buzzer_advance_frequency();
+    buzzer_play_sound();
     decisecond_count = 0;
   }
 
