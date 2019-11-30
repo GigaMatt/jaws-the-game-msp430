@@ -6,14 +6,14 @@ The objective for this project is to use the MSP430 Microcontroller and our crea
 
 **BabySharkScales** is the (un)Natural Christmas toy for every good little girl and good little boy. With notes that represent musical scales and tiny sharks that roll across the screen, BabySharkScales ensures your family is no longer driven insane by the constant tune of Christmas Carols but by the same notes that every musician learns on their way to greatness!
 
-
-This toy will:
+## Features
+BabySharkScales will:
 1. Dynamically render graphical elements that move and change
 2. Handle colisions properly with other shapes and area boundaries
 3. Produce sounds triggered by game events such that the game does not pause
 4. Communicate with the player using text
 5. Include a state machine written in assembly language
-6. respond to user input (from buttons)
+6. Respond to user input (from buttons)
 
 ## How To Compile/Run 
 1. Using the _SystemsVM Virtual_ Machine,<br />
