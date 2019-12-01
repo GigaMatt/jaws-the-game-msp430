@@ -104,7 +104,7 @@ Layer human_head_layer = {
     {(screenWidth / 2), (screenHeight / 2)}, /**< center */
     {0, 0},
     {0, 0}, /* last & next pos */
-    COLOR_SEA_GREEN,
+    COLOR_BLACK,
     &human_body_layer,
 };
 
@@ -199,13 +199,13 @@ void mlAdvance(MovLayer *ml, Region *fence)
         velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
         if (velocity < 0)
         {
-          drawString5x7(13, 35, "JAWS     ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35
+          drawString5x7(25, 40, "JAWS     ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35
           buzzer_set_period(1000);
           newPos.axes[axis] += (2 * velocity);
         }
         if (velocity > 0)
         {
-          drawString5x7(13, 35, "THE GAME ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35          
+          drawString5x7(25, 35, "THE GAME ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35          
         }
       } /**< if outside of fence */
     }   /**< for axis */
