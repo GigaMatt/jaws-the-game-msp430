@@ -287,5 +287,5 @@ void main()
 //     count = 0;
 //   }
 
-  P1OUT &= ~GREEN_LED; /**< Green LED off when cpu off */
-}
+//   P1OUT &= ~GREEN_LED; /**< Green LED off when cpu off */
+// }
