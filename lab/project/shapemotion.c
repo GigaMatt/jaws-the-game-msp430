@@ -302,7 +302,7 @@ void wdt_c_handler()
       //led_state = 0;
       //sound = 1000;
       //period = 10;
-      buzzer_play_sound();
+      //buzzer_play_sound();
       //led_changed = 1;
       //led_advance();
       //led_update();
@@ -313,17 +313,17 @@ void wdt_c_handler()
 		case 2:
 			// mlAdvance(&moveRight, &fieldFence, &mlfrog);
 			// movLayerDraw(&moveRight, &frog);
-      buzzer_play_sound();
+      //buzzer_play_sound();
 			break;
 		case 4:
 			// mlAdvance(&moveUp, &fieldFence, &mlfrog);
 			// movLayerDraw(&moveUp, &frog);
-      buzzer_play_sound();
+      //buzzer_play_sound();
 			break;
 		case 8:
 			// mlAdvance(&moveDown, &fieldFence, &mlfrog);
 			// movLayerDraw(&moveDown, &frog);
-      buzzer_play_sound();
+      //buzzer_play_sound();
 			break;
 	  }
     mlAdvance(&ml1, &fieldFence);
