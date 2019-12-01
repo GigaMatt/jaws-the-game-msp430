@@ -34,7 +34,7 @@ circledemo.elf: circledemo.o libCircle.a
 
 
 load: circledemo.elf
-	msp430loader.sh $^
+	mspdebug rf2500 "prog $^"
 
 
 
