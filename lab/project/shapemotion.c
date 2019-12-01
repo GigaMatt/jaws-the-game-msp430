@@ -245,9 +245,9 @@ void main()
   shapeInit();
   p2sw_init(1);
   shapeInit();
-  switch_init();  // Setup Switches
+  //switch_init();  // Setup Switches
   buzzer_init();  // Call Speakers
-  led_init();     // Call LEDs
+  //led_init();     // Call LEDs
   layerInit(&human_body_layer);
 
   layerDraw(&human_body_layer);
