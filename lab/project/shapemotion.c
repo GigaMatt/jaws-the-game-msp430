@@ -280,6 +280,7 @@ void wdt_c_handler()
     // Draw Objects on Screen
 
     mlAdvance(&ml1, &fieldFence);
+    mlAdvance(&ml4, &fieldFence);
     if (p2sw_read())
       redrawScreen = 1;
     count = 0;
