@@ -75,7 +75,7 @@ Layer lower_shark_layer = {
     {(screenWidth / 2) +15, (screenHeight / 2)-57}, /**< bit below & right of center +10,+61*/
     {0, 0},
     {0, 0}, /* last & next pos */
-    COLOR_WHITE,
+    COLOR_NAVY,
     &layer4,
 };
 
@@ -94,7 +94,7 @@ Layer human_body_layer = {
     {(screenWidth / 2), (screenHeight / 2)-73},
     {0, 0},
     {0, 0}, /* last & next pos */
-    COLOR_TAN,
+    COLOR_BEIGE,
     &border_field_layer,
 };
 
