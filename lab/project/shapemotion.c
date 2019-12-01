@@ -68,7 +68,7 @@ Layer layer4 = {
     0,
 };
 
-Layer layer3 = {
+Layer lower_shark_layer = {
     // Lower Shark
 
     (AbShape *)&right_arrow,
@@ -86,7 +86,7 @@ Layer border_field_layer = {
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_RED,
-    &layer3};
+    &lower_shark_layer};
 
 Layer human_body_layer = {
     // Swimming Human Body
@@ -131,7 +131,7 @@ typedef struct MovLayer_s
 } MovLayer;
 
 /* initial value of {0,0} will be overwritten */
-MovLayer ml3 = {&layer3, {1, 0}, 0}; /**< not all layers move */
+MovLayer ml3 = {&lower_shark_layer, {1, 0}, 0}; /**< not all layers move */
 MovLayer ml1 = {&human_body_layer, {0, 0}, &ml3};
 MovLayer ml0 = {&human_head_layer, {0, 0}, &ml1};
 //MovLayer ml4 = { &layer4, {2,1}, &ml0 };
