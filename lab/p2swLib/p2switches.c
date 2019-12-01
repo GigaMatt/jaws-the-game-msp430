@@ -38,10 +38,10 @@ p2sw_read() {
 }
 
 /* Switch on P2 (S1) */
-void
-__interrupt_vec(PORT2_VECTOR) Port_2(){
-  if (P2IFG & switch_mask) {  /* did a button cause this interrupt? */
-    P2IFG &= ~switch_mask;	/* clear pending sw interrupts */
-    switch_update_interrupt_sense();
-  }
+// void
+// __interrupt_vec(PORT2_VECTOR) Port_2(){
+//   if (P2IFG & switch_mask) {  /* did a button cause this interrupt? */
+//     P2IFG &= ~switch_mask;	/* clear pending sw interrupts */
+//     updateSharkPosition();
+//   }
 }
