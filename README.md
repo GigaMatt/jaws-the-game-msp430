@@ -4,9 +4,9 @@ The objective for this project is to use the MSP430 Microcontroller and our crea
 
 ![Jaws-Promo-Image](/extras/jaws-promo-image.jpg)
 
-**JAWS, THE GAME** is inspired by the 1975 Steven Spielberg thriller-film that remains a quintessential part of pop culture, through Discovery Channel's annual _Shark Week_ summer TV event. As they say during Shark Week, "it's a bad week to be a seal!"
+**JAWS, THE GAME** is inspired by the 1975 Steven Spielberg thriller-film that remains a quintessential part of pop culture, through Discovery Channel's annual _Shark Week_ summer TV event. As they say during Shark Week, "it's a bad week to be a seal!" This work is a continuation of my (failed) May 2019 attempt at this project.
 
-If your gift-giving is as untraditional as I am, _Jaws, The Game_ is the (un)Natural Christmas toy for almost any adult. With graphical sharks representative of an time long past, and physical buttons that alter the tenor of sound as you play, _Jaws, The Game_ is sure to take you back this holiday season, while ensuring your children learn about some of Hollywood's greatest films!
+If your gift-giving is as unnatural as I am, then _Jaws, The Game_ is the perfect Christmas toy for almost any adult. With graphical sharks representative of an time long past, and physical buttons that alter the tenor of sound as you play, _Jaws, The Game_ is sure to take you back this holiday season, while ensuring your children learn about one of Hollywood's greatest films!
 
 ## Features
 _JAWS, THE GAME_ will:
@@ -17,7 +17,7 @@ _JAWS, THE GAME_ will:
 5. Include a state machine written in assembly language
 6. Respond to user input (from buttons)
 
-## How To Compile/Run 
+## How To Compile & Run 
 1. Using the _SystemsVM Virtual_ Machine,<br />
   a. Navigate to **/project/timerLib/**<br />
   b. Enter the command ```make```<br />
@@ -28,4 +28,12 @@ _JAWS, THE GAME_ will:
 
 ## Dependancies
 1. The 2019 version of the _SystemsVM_ Virtual Machine provided by UTEP CS 3432
-2. MSP-EXP430G2ET Hardware
+2. MSP-430 Hardware
+
+## Known Issues
+1. The Human swimming at the top of the screen initializes as intended but is mostly sawed off when objects begin moving.
+
+## Contributions
+1. Jesus "Max" Hernandez: Teaching me how the screen is oriented.
+2. Timothy "Tim" McCray: Teahing me how to work with the screen orientation for drawing shapes.
+3. Andres "Andy" Ramos: Teaching me how to "create custom shapes" by slicing existing shapes.
