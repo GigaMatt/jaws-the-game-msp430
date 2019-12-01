@@ -196,7 +196,7 @@ void mlAdvance(MovLayer *ml, Region *fence)
         }
         if (velocity > 0)
         {
-          drawString5x7(30, 35, "CIRCA 1975 ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35          
+          drawString5x7(34, 75, "CIRCA 1975 ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35          
         }
       } /**< if outside of fence */
     }   /**< for axis */
