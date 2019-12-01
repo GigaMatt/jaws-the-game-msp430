@@ -26,7 +26,7 @@ int abSlicedArrowCheck(const AbRArrow *shape, const Vec2 *center_position, const
 
   Vec2 relative_position;
   vec2Sub(&relative_position, pixel, center_position);
-  if (relative_position.axes[1] >= -6 && relative_position.axes[0] / 2 < relative_position.axes[1])
+  if (relative_position.axes[1] >= -3 && relative_position.axes[0] / 2 < relative_position.axes[1])//-6
     return 0;
   else
     return abRArrowCheck(shape, center_position, pixel);
@@ -58,24 +58,24 @@ AbRectOutline boder_outline = {
 
 /* Define Layers for objects */
 Layer layer4 = {
-    // Lower Shark
+    // Upper Shark
 
     (AbShape *)&right_arrow,
     {(screenWidth / 2) + 5, (screenHeight / 2) + 5}, /**< bit below & right of center */
     {0, 0},
     {0, 0}, /* last & next pos */
-    COLOR_RED,
+    COLOR_WHITE,
     0,
 };
 
 Layer layer3 = {
-    // Upper Shark
+    // Lower Shark
 
     (AbShape *)&right_arrow,
     {(screenWidth / 2) + 10, (screenHeight / 2) + 61}, /**< bit below & right of center */
     {0, 0},
     {0, 0}, /* last & next pos */
-    COLOR_WHITE,
+    COLOR_BLUE,
     &layer4,
 };
 
