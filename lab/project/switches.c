@@ -12,6 +12,7 @@
 #include "led.h"
 #include "stateMachines.h"
 #include "switches.h"
+#include "buzzer.h"
 
 short sound;
 char switch_state_down, period, switch_state_changed; /* effectively boolean */
