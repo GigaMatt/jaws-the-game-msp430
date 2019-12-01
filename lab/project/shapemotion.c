@@ -98,15 +98,15 @@ Layer human_body_layer = {
     &border_field_layer,
 };
 
-// Layer human_head_layer = {
-//     // Swimming Human Head
-//     (AbShape *)&circle14,
-//     {(screenWidth / 2), (screenHeight / 2)}, /**< center */
-//     {0, 0},
-//     {0, 0}, /* last & next pos */
-//     COLOR_BROWN,
-//     &human_body_layer,
-// };
+Layer human_head_layer = {
+    // Swimming Human Body
+    (AbShape *)&circle14,
+    {(screenWidth / 2), (screenHeight / 2)}, /**< center */
+    {0, 0},
+    {0, 0}, /* last & next pos */
+    COLOR_BROWN,
+    &human_body_layer,
+};
 
 // Layer human_head_layer = {
 //     /** Layer with an yellow circle */
@@ -133,7 +133,7 @@ typedef struct MovLayer_s
 /* initial value of {0,0} will be overwritten */
 MovLayer ml3 = {&lower_shark_layer, {1, 0}, 0}; /**< not all layers move */
 MovLayer ml1 = {&human_body_layer, {0, 0}, &ml3};
-//MovLayer ml0 = {&human_head_layer, {0, 0}, &ml1};
+MovLayer ml0 = {&human_head_layer, {0, 0}, &ml1};
 //MovLayer ml4 = { &layer4, {2,1}, &ml0 };
 
 void movLayerDraw(MovLayer *movLayers, Layer *layers)
@@ -196,7 +196,7 @@ void mlAdvance(MovLayer *ml, Region *fence)
       if ((shapeBoundary.topLeft.axes[axis] < fence->topLeft.axes[axis]) ||
           (shapeBoundary.botRight.axes[axis] > fence->botRight.axes[axis]))
       {
-        velocity = ml->velocity.axes[axis+2] = -ml->velocity.axes[axis+2];
+        velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
         if (velocity < 0)
         {
           drawString5x7(13, 35, "JAWS: IT'S A BAD\n", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35
@@ -241,6 +241,7 @@ void main()
 
   enableWDTInterrupts(); /**< enable periodic interrupt */
   or_sr(0x8);            /**< GIE (enable interrupts) */
+
   for (;;)
   {
     while (!redrawScreen)
@@ -250,7 +251,7 @@ void main()
     }
     P1OUT |= GREEN_LED; /**< Green led on when CPU on */
     redrawScreen = 0;
-    //movLayerDraw(&ml0, &human_head_layer);
+    movLayerDraw(&ml0, &human_head_layer);
   }
 }
 
