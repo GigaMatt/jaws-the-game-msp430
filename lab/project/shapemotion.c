@@ -108,7 +108,7 @@ Layer human_head_layer = {
     &human_body_layer,
 };
 
-// Layer layer0 = {
+// Layer human_head_layer = {
 //     /** Layer with an yellow circle */
 //     (AbShape *)&circle14,
 //     {(screenWidth / 2) + 10, (screenHeight / 2) + 7}, /**< bit below & right of center */
@@ -133,7 +133,7 @@ typedef struct MovLayer_s
 /* initial value of {0,0} will be overwritten */
 MovLayer ml3 = {&layer3, {1, 0}, 0}; /**< not all layers move */
 MovLayer ml1 = {&human_body_layer, {0, 0}, &ml3};
-MovLayer ml0 = {&layer0, {0, 0}, &ml1};
+MovLayer ml0 = {&human_head_layer, {0, 0}, &ml1};
 //MovLayer ml4 = { &layer4, {2,1}, &ml0 };
 
 void movLayerDraw(MovLayer *movLayers, Layer *layers)
@@ -251,7 +251,7 @@ void main()
     }
     P1OUT |= GREEN_LED; /**< Green led on when CPU on */
     redrawScreen = 0;
-    movLayerDraw(&ml0, &layer0);
+    movLayerDraw(&ml0, &human_head_layer);
   }
 }
 
