@@ -197,7 +197,7 @@ void mlAdvance(MovLayer *ml, Region *fence)
           (shapeBoundary.botRight.axes[axis] > fence->botRight.axes[axis]))
       {
         velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
-        drawString5x7(11, 25, "JAWS               ", COLOR_RED, COLOR_GREEN); //prev 5x7 11, 35
+        //drawString5x7(11, 25, "JAWS               ", COLOR_RED, COLOR_GREEN); //prev 5x7 11, 35
         if (velocity < 0)
         {
           drawString5x7(11, 35, "IT'S A BAD WEEK    ", COLOR_RED, COLOR_GREEN); //prev 5x7 20, 35
@@ -243,7 +243,7 @@ void main()
   enableWDTInterrupts(); /**< enable periodic interrupt */
   or_sr(0x8);            /**< GIE (enable interrupts) */
 
-  drawString5x7(41, 6, "JAWS", COLOR_WHITE, COLOR_BLUE);
+  drawString5x7(41, 6, "JAWS", COLOR_RED, COLOR_GREEN);
   for (;;)
   {
     while (!redrawScreen)
@@ -291,7 +291,7 @@ void wdt_c_handler()
     // Draw Objects on Screen
 
     mlAdvance(&ml1, &fieldFence);
-    mlAdvance(&ml3, &fieldFence);
+    //mlAdvance(&ml3, &fieldFence);
     if (p2sw_read())
       redrawScreen = 1;
     count = 0;
