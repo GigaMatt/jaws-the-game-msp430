@@ -61,7 +61,7 @@ Layer lower_shark_layer = {
     // Lower Shark
 
     (AbShape *)&right_arrow,
-    {(screenWidth / 2)+10, (screenHeight / 2)}, /**< bit below & right of center +15+61*/
+    {(screenWidth / 2)+10, (screenHeight / 2)},
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_WHITE,
@@ -72,7 +72,7 @@ Layer upper_shark_layer = {
     // Shark Eating Human
 
     (AbShape *)&right_arrow,
-    {(screenWidth / 2) -25, (screenHeight / 2)-60}, /**< bit below & right of center +10,+61*/
+    {(screenWidth / 2) -25, (screenHeight / 2)-60},
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_GRAY,
@@ -190,13 +190,13 @@ void mlAdvance(MovLayer *ml, Region *fence)
         velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
         if (velocity < 0)
         {
-          drawString5x7(22, 55, "JAWS: THE GAME ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35
+          drawString5x7(22, 55, "JAWS: THE GAME ", COLOR_RED, COLOR_BLACK);
           buzzer_set_period(1000);
           newPos.axes[axis] += (2 * velocity);
         }
         if (velocity > 0)
         {
-          drawString5x7(35, 100, "CIRCA 1975 ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35          
+          drawString5x7(13, 100, "PRESS ANY BUTTON ", COLOR_RED, COLOR_BLACK); //CIRCA 1975     
         }
       } /**< if outside of fence */
     }   /**< for axis */
