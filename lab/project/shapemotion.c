@@ -98,15 +98,15 @@ Layer human_body_layer = {
     &border_field_layer,
 };
 
-Layer human_head_layer = {
-    // Swimming Human Body
-    (AbShape *)&circle14,
-    {(screenWidth / 2), (screenHeight / 2)}, /**< center */
-    {0, 0},
-    {0, 0}, /* last & next pos */
-    COLOR_BROWN,
-    &human_body_layer,
-};
+// Layer human_head_layer = {
+//     // Swimming Human Head
+//     (AbShape *)&circle14,
+//     {(screenWidth / 2), (screenHeight / 2)}, /**< center */
+//     {0, 0},
+//     {0, 0}, /* last & next pos */
+//     COLOR_BROWN,
+//     &human_body_layer,
+// };
 
 // Layer human_head_layer = {
 //     /** Layer with an yellow circle */
@@ -196,7 +196,7 @@ void mlAdvance(MovLayer *ml, Region *fence)
       if ((shapeBoundary.topLeft.axes[axis] < fence->topLeft.axes[axis]) ||
           (shapeBoundary.botRight.axes[axis] > fence->botRight.axes[axis]))
       {
-        velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
+        velocity = ml->velocity.axes[axis+2] = -ml->velocity.axes[axis+2];
         if (velocity < 0)
         {
           drawString5x7(13, 35, "JAWS: IT'S A BAD\n", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35
