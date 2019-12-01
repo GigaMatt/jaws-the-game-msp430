@@ -191,7 +191,8 @@ void mlAdvance(MovLayer *ml, Region *fence)
         if (velocity < 0)
         {
           drawString5x7(22, 55, "JAWS: THE GAME ", COLOR_RED, COLOR_BLACK);
-          buzzer_set_period(1000);
+          //PLAY SOUND
+          //buzzer_set_period(1000);
           newPos.axes[axis] += (2 * velocity);
         }
         if (velocity > 0)
