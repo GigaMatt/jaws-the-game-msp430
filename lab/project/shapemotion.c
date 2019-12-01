@@ -243,7 +243,7 @@ void main()
   enableWDTInterrupts(); /**< enable periodic interrupt */
   or_sr(0x8);            /**< GIE (enable interrupts) */
 
-  drawString5x7(41, 6, "JAWS", COLOR_RED, COLOR_GREEN);
+  //drawString5x7(41, 6, "JAWS", COLOR_WHITE, COLOR_BLUE);
   for (;;)
   {
     while (!redrawScreen)
