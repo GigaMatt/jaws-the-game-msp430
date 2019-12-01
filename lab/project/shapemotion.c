@@ -60,8 +60,8 @@ AbRectOutline boder_outline = {
 Layer layer4 = {
     // Upper Shark
 
-    (AbShape *)&right_arrow,
-    {(screenWidth / 2)+15, (screenHeight / 2)-47}, /**< bit below & right of center +5,+5*/
+    (AbShape *)&circle14,
+    {(screenWidth / 2)+18, (screenHeight / 2)-73}, /**< bit below & right of center +5,+5*/
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_WHITE,
@@ -72,7 +72,7 @@ Layer lower_shark_layer = {
     // Lower Shark
 
     (AbShape *)&right_arrow,
-    {(screenWidth / 2) + 10, (screenHeight / 2) + 61}, /**< bit below & right of center */
+    {(screenWidth / 2)+15, (screenHeight / 2)-47}, /**< bit below & right of center +10,+61 */
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_BLUE,
