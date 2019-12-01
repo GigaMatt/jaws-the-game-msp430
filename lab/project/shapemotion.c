@@ -61,7 +61,7 @@ Layer layer4 = {
     // Upper Shark
 
     (AbShape *)&right_arrow,
-    {(screenWidth / 2)-15, (screenHeight / 2)-47}, /**< bit below & right of center +5,+5*/
+    {(screenWidth / 2)+15, (screenHeight / 2)-47}, /**< bit below & right of center +5,+5*/
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_WHITE,
