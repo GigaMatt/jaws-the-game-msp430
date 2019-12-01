@@ -122,9 +122,9 @@ typedef struct MovLayer_s
 } MovLayer;
 
 /* initial value of {0,0} will be overwritten */
-MovLayer ml3 = {&upper_shark_layer, {2, 0}, 0};   // Upper Shark Chases Human
+MovLayer ml3 = {&upper_shark_layer, {1, 0}, 0};   // Upper Shark Chases Human
 MovLayer ml1 = {&human_body_layer, {1, 0}, &ml3}; // Human Swims Back & Forth
-MovLayer ml4 = {&lower_shark_layer, {2,0}, &ml1};  // Bottom Shark Swims for Prey
+MovLayer ml4 = {&lower_shark_layer, {1,0}, &ml1};  // Bottom Shark Swims for Prey
 MovLayer ml0 = {&human_head_layer, {1, 0}, &ml4};
 
 void movLayerDraw(MovLayer *movLayers, Layer *layers)
@@ -196,7 +196,7 @@ void mlAdvance(MovLayer *ml, Region *fence)
         }
         if (velocity > 0)
         {
-          drawString5x7(62, 75, "CIRCA 1975 ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35          
+          drawString5x7(50, 55, "CIRCA 1975 ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35          
         }
       } /**< if outside of fence */
     }   /**< for axis */
