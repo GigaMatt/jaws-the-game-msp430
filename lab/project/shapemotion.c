@@ -267,15 +267,19 @@ void wdt_c_handler()
           
 		case 1:
       buzzer_play_sound();
+      updateSharkPosition()
 			break;
 		case 2:
       buzzer_play_sound();
+      updateSharkPosition()
 			break;
 		case 4:
       buzzer_play_sound();
+      updateSharkPosition()
 			break;
 		case 8:
       buzzer_play_sound();
+      updateSharkPosition()
 			break;
 	  }
     mlAdvance(&ml1, &fieldFence);
@@ -326,21 +330,25 @@ void updateSharkPosition()
     // SW1
     case BIT0:
     direction = 1; 
+    changeSharkDirection(&x_direction, &y_direction, direction);
     break;
     
     // SW2
     case BIT1:
-    direction = 2; 
+    direction = 2;
+    changeSharkDirection(&x_direction, &y_direction, direction);
     break;
     
     // SW3
     case BIT2:
-    direction = 3; 
+    direction = 3;
+    changeSharkDirection(&x_direction, &y_direction, direction);
     break;
     
     // SW4
     case BIT3: 
     direction = 4; 
+    changeSharkDirection(&x_direction, &y_direction, direction);
     break;
     
     // Default
