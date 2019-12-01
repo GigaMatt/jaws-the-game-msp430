@@ -98,15 +98,15 @@ Layer human_layer = {
     &border_field_layer,
 };
 
-Layer layer0 = {
-    // Innocent Seal
-    (AbShape *)&rectangle_size_7,
-    {screenWidth / 2 + 40, screenHeight / 2 + 51}, /**< center */
-    {0, 0},
-    {0, 0}, /* last & next pos */
-    COLOR_WHITE,
-    &human_layer,
-};
+// Layer layer0 = {
+//     // Innocent Seal
+//     (AbShape *)&rectangle_size_7,
+//     {screenWidth / 2 + 40, screenHeight / 2 + 51}, /**< center */
+//     {0, 0},
+//     {0, 0}, /* last & next pos */
+//     COLOR_WHITE,
+//     &human_layer,
+// };
 
 // Layer layer0 = {
 //     /** Layer with an yellow circle */
@@ -133,7 +133,7 @@ typedef struct MovLayer_s
 /* initial value of {0,0} will be overwritten */
 MovLayer ml3 = {&layer3, {1, 0}, 0}; /**< not all layers move */
 MovLayer ml1 = {&human_layer, {0, 0}, &ml3};
-MovLayer ml0 = {&layer0, {0, 0}, &ml1};
+//MovLayer ml0 = {&layer0, {0, 0}, &ml1};
 //MovLayer ml4 = { &layer4, {2,1}, &ml0 };
 
 void movLayerDraw(MovLayer *movLayers, Layer *layers)
