@@ -91,7 +91,7 @@ Layer border_field_layer = {
 Layer human_layer = {
     // Swimming Human
     (AbShape *)&rectangle_size_10,                 // Human as
-    {screenWidth / 2 + 40, screenHeight / 2 + 51}, /**< center */
+    {screenWidth / 2 + 40, screenHeight / 2}, // center  + 51
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_BROWN,
