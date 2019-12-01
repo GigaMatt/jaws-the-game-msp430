@@ -365,10 +365,10 @@ void updateSharkPosition(){
   shark_layer->posNext = newposition;
   P2IFG = 0;
 }
-void
-__interrupt_vec(PORT2_VECTOR) Port_2(){
-  updateSharkPosition();
-}
+// void
+// __interrupt_vec(PORT2_VECTOR) Port_2(){
+//   updateSharkPosition();
+// }
 
 
 //velocity x and velocity y is changed to match the direction
