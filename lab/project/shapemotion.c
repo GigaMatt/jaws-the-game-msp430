@@ -215,7 +215,7 @@ void main()
   enableWDTInterrupts();      /**< enable periodic interrupt */
   or_sr(0x8);	              /**< GIE (enable interrupts) */
 
- drawString5x7(41,6,"JAWS", COLOR_WHITE, COLOR_BLUE);
+ drawString5x7(41,6,"Shark Game", COLOR_WHITE, COLOR_BLUE);
   for(;;) { 
     while (!redrawScreen) { /**< Pause CPU if screen doesn't need updating */
       P1OUT &= ~GREEN_LED;    /**< Green led off witHo CPU */
