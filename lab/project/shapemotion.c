@@ -161,7 +161,7 @@ void movLayerDraw(MovLayer *movLayers, Layer *layers)
       for (col = bounds.topLeft.axes[0]; col <= bounds.botRight.axes[0]; col++)
       {
         Vec2 pixelPos = {col, row};
-        u_int color = background_color;
+        u_int color = bgColor;
         Layer *probeLayer;
         for (probeLayer = layers; probeLayer;
              probeLayer = probeLayer->next)
@@ -215,7 +215,7 @@ void mlAdvance(MovLayer *ml, Region *fence)
 }
 
 // System Sets Background Color
-u_int background_color = COLOR_GREEN; /**< The background color */
+u_int bgColor = COLOR_GREEN; /**< The background color */
 int redrawScreen = 1;                 /**< Boolean for whether screen needs to be redrawn */
 
 Region fieldFence; /**< fence around playing field  */
@@ -237,7 +237,7 @@ void main()
 
   buzzer_init();
 
-  layerGetBounds(&fieldLayer, &fieldFence);
+  layerGetBounds(&border_field_layer, &fieldFence);
 
   enableWDTInterrupts(); /**< enable periodic interrupt */
   or_sr(0x8);            /**< GIE (enable interrupts) */
@@ -262,7 +262,7 @@ void decisecond()
   static char cnt = 0;
   if (++cnt > 2)
   {
-    buzzer_play_sound();
+    buzzer_advance_frequency();
     cnt = 0;
   }
 }
@@ -272,7 +272,7 @@ void wdt_c_handler()
   static char second_count = 0, decisecond_count = 0;
   if (++decisecond_count == 25)
   {
-    buzzer_play_sound();
+    buzzer_advance_frequency();
     decisecond_count = 0;
   }
 
