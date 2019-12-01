@@ -196,7 +196,7 @@ void mlAdvance(MovLayer *ml, Region *fence)
         }
         if (velocity > 0)
         {
-          drawString5x7(13, 100, "PRESS ANY BUTTON ", COLOR_RED, COLOR_BLACK); //CIRCA 1975     
+          drawString5x7(17, 100, "PRESS ANY BUTTON ", COLOR_RED, COLOR_BLACK); //CIRCA 1975     
         }
       } /**< if outside of fence */
     }   /**< for axis */
