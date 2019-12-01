@@ -46,7 +46,7 @@ int abSlicedRectCheck(const AbRect *rect, const Vec2 *center_position, const Vec
 
 //  Build Objects
 AbRect rectangle_size_10 = {abRectGetBounds, abSlicedRectCheck, {10, 10}}; /**< 10x10 rectangle */
-AbRect rectangle_size_15 = {abRectGetBounds, abSlicedRectCheck, {15, 15}};    /**< 7x7 human rectangle */
+AbRect rectangle_size_7 = {abRectGetBounds, abSlicedRectCheck, {7, 7}};    /**< 7x7 human rectangle */
 AbRArrow right_arrow = {abRArrowGetBounds, abSlicedArrowCheck, 30};
 
 AbRectOutline boder_outline = {
@@ -88,9 +88,9 @@ Layer border_field_layer = {
     COLOR_RED,
     &layer3};
 
-Layer human_layer = {
-    // Swimming Human
-    (AbShape *)&rectangle_size_15,
+Layer human_body_layer = {
+    // Swimming Human Body
+    (AbShape *)&rectangle_size_7,
     {(screenWidth / 2), (screenHeight / 2)-73},
     {0, 0},
     {0, 0}, /* last & next pos */
@@ -98,14 +98,14 @@ Layer human_layer = {
     &border_field_layer,
 };
 
-Layer layer0 = {
-    // Innocent Seal
-    (AbShape *)&rectangle_size_15,
-    {screenWidth / 2, screenHeight / 2}, /**< center */
+Layer human_head_layer = {
+    // Swimming Human Body
+    (AbShape *)&circle14,
+    {screenWidth / 2+15, screenHeight / 2}-73, /**< center */
     {0, 0},
     {0, 0}, /* last & next pos */
-    COLOR_RED,
-    &human_layer,
+    COLOR_BROWN,
+    &human_body_layer,
 };
 
 // Layer layer0 = {
@@ -115,7 +115,7 @@ Layer layer0 = {
 //     {0, 0},
 //     {0, 0}, /* last & next pos */
 //     COLOR_YELLOW,
-//     &human_layer,
+//     &human_body_layer,
 // };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -132,7 +132,7 @@ typedef struct MovLayer_s
 
 /* initial value of {0,0} will be overwritten */
 MovLayer ml3 = {&layer3, {1, 0}, 0}; /**< not all layers move */
-MovLayer ml1 = {&human_layer, {0, 0}, &ml3};
+MovLayer ml1 = {&human_body_layer, {0, 0}, &ml3};
 MovLayer ml0 = {&layer0, {0, 0}, &ml1};
 //MovLayer ml4 = { &layer4, {2,1}, &ml0 };
 
@@ -232,8 +232,8 @@ void main()
 
   shapeInit();
 
-  layerInit(&human_layer);
-  layerDraw(&human_layer);
+  layerInit(&human_body_layer);
+  layerDraw(&human_body_layer);
 
   buzzer_init();
 
