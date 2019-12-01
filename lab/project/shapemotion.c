@@ -101,7 +101,7 @@ Layer human_layer = {
 Layer layer0 = {
     // Innocent Seal
     (AbShape *)&rectangle_size_7,
-    {screenWidth / 2 + 40, screenHeight / 2 + 5}, /**< center */
+    {screenWidth / 2, screenHeight / 2 + 5}, /**< center */
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_WHITE,
