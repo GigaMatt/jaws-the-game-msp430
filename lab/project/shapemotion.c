@@ -100,7 +100,7 @@ Layer human_layer = {
 
 Layer layer0 = {
     // Innocent Seal
-    (AbShape *)&rectangle_size_7,
+    (AbShape *)&boder_outline,
     {screenWidth / 2, screenHeight / 2}, /**< center */
     {0, 0},
     {0, 0}, /* last & next pos */
