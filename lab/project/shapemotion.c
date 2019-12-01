@@ -199,13 +199,13 @@ void mlAdvance(MovLayer *ml, Region *fence)
         velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
         if (velocity < 0)
         {
-          drawString5x7(10, 35, "JAWS", COLOR_RED, COLOR_WHITE); //prev 5x7 20, 35
+          drawString5x7(11, 35, "JAWS               ", COLOR_RED, COLOR_GREEN); //prev 5x7 20, 35
           buzzer_set_period(1000);
           newPos.axes[axis] += (2 * velocity);
         }
         if (velocity > 0)
         {
-          drawString5x7(10, 35, "IT'S A BAD WEEK TO BE A SEAL", COLOR_RED, COLOR_WHITE); //prev 5x7
+          drawString5x7(11, 35, "BAD WEEK TO BE A SEAL", COLOR_RED, COLOR_GREEN); //prev 5x7
         }
       } /**< if outside of fence */
     }   /**< for axis */
