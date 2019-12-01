@@ -342,7 +342,7 @@ void updateSharkPosition(){
   MovLayer* shark_move_layer = &ml4; //Center Shark's MovLayer`// Could also me ml4? or mml0?
   Layer* shark_layer = &center_shark_layer; 
   Vec2 newposition;
-  int* x_direction, y_direction;
+  int x_direction, y_direction;
   vec2Add(&newposition, &(shark_layer->posNext), &(shark_move_layer->velocity));
   int direction = 0;
 
