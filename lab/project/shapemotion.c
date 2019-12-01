@@ -123,7 +123,7 @@ typedef struct MovLayer_s
 
 /* initial value of {0,0} will be overwritten */
 MovLayer ml3 = {&upper_shark_layer, {1, 0}, 0}; /**< not all layers move */
-MovLayer ml1 = {&human_body_layer, {0, 0}, &ml3};
+MovLayer ml1 = {&human_body_layer, {2, 0}, &ml3};
 MovLayer ml0 = {&human_head_layer, {0, 0}, &ml1};
 MovLayer ml4 = {&lower_shark_layer, {2,1}, &ml0 };
 
