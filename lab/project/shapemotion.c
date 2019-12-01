@@ -57,7 +57,7 @@ AbRectOutline boder_outline = {
     {screenWidth / 2 - 10, screenHeight / 2 - 15}};
 
 /* Define Layers for objects */
-Layer layer4 = {
+Layer lower_shark_layer = {
     // Upper Shark
 
     (AbShape *)&right_arrow,
@@ -68,7 +68,7 @@ Layer layer4 = {
     0,
 };
 
-Layer lower_shark_layer = {
+Layer upper_shark_layer = {
     // Lower Shark
 
     (AbShape *)&right_arrow,
@@ -76,7 +76,7 @@ Layer lower_shark_layer = {
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_GRAY,
-    &layer4,
+    &lower_shark_layer,
 };
 
 Layer border_field_layer = {
@@ -86,7 +86,7 @@ Layer border_field_layer = {
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_RED,
-    &lower_shark_layer};
+    &upper_shark_layer};
 
 Layer human_body_layer = {
     // Swimming Human Body
@@ -108,15 +108,6 @@ Layer human_head_layer = {
     &human_body_layer,
 };
 
-// Layer human_head_layer = {
-//     /** Layer with an yellow circle */
-//     (AbShape *)&circle14,
-//     {(screenWidth / 2) + 10, (screenHeight / 2) + 7}, /**< bit below & right of center */
-//     {0, 0},
-//     {0, 0}, /* last & next pos */
-//     COLOR_YELLOW,
-//     &human_body_layer,
-// };
 
 ////////////////////////////////////////////////////////////////////////////////
 /** Moving Layer
@@ -131,10 +122,10 @@ typedef struct MovLayer_s
 } MovLayer;
 
 /* initial value of {0,0} will be overwritten */
-MovLayer ml3 = {&lower_shark_layer, {1, 0}, 0}; /**< not all layers move */
+MovLayer ml3 = {&upper_shark_layer, {1, 0}, 0}; /**< not all layers move */
 MovLayer ml1 = {&human_body_layer, {0, 0}, &ml3};
 MovLayer ml0 = {&human_head_layer, {0, 0}, &ml1};
-//MovLayer ml4 = { &layer4, {2,1}, &ml0 };
+//MovLayer ml4 = { &lower_shark_layer, {2,1}, &ml0 };
 
 void movLayerDraw(MovLayer *movLayers, Layer *layers)
 {
