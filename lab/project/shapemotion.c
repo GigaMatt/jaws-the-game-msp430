@@ -191,6 +191,7 @@ void mlAdvance(MovLayer *ml, Region *fence)
   {
     vec2Add(&newPos, &ml->layer->posNext, &ml->velocity);
     abShapeGetBounds(ml->layer->abShape, &newPos, &shapeBoundary);
+    drawString5x7(41, 6, "JAWS", COLOR_WHITE, COLOR_BLUE);
     for (axis = 0; axis < 2; axis++)
     {
       if ((shapeBoundary.topLeft.axes[axis] < fence->topLeft.axes[axis]) ||
@@ -242,7 +243,6 @@ void main()
   enableWDTInterrupts(); /**< enable periodic interrupt */
   or_sr(0x8);            /**< GIE (enable interrupts) */
 
-  drawString5x7(41, 6, "JAWS", COLOR_WHITE, COLOR_BLUE);
   for (;;)
   {
     while (!redrawScreen)
