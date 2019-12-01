@@ -267,25 +267,32 @@ void main()
 //   }
 // }
 
+
 void wdt_c_handler()
 {
+  //  Transition from State to State
+
   // static char second_count = 0, decisecond_count = 0;
   // if (++decisecond_count == 25)
   // {
+  //   // Play Sound
+
   //   buzzer_advance_frequency();
   //   decisecond_count = 0;
+  // }
+
+  static short count = 0;
+  P1OUT |= GREEN_LED; /**< Green LED on when cpu on */
+  count++;
+  if (count == 15)
+  {
+    // Draw Objects on Screen
+
+    mlAdvance(&ml1, &fieldFence);
+    if (p2sw_read())
+      redrawScreen = 1;
+    count = 0;
   }
 
-//   static short count = 0;
-//   P1OUT |= GREEN_LED; /**< Green LED on when cpu on */
-//   count++;
-//   if (count == 15)
-//   {
-//     mlAdvance(&ml1, &fieldFence);
-//     if (p2sw_read())
-//       redrawScreen = 1;
-//     count = 0;
-//   }
-
-//   P1OUT &= ~GREEN_LED; /**< Green LED off when cpu off */
-// }
+  P1OUT &= ~GREEN_LED; /**< Green LED off when cpu off */
+}
