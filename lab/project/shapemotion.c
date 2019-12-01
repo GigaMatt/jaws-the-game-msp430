@@ -286,7 +286,7 @@ void wdt_c_handler()
   P1OUT &= ~GREEN_LED; /**< Green LED off when cpu off */
 }
 
-/* 
+ 
 // Change Direction According to New Velocity
 void changeSharkDirection(int* x_direction, int* y_direction, int direction)
 {
@@ -356,4 +356,4 @@ void updateSharkPosition()
   shark_layer->posNext = newposition;
   P2IFG = 0;
 }
- */
+ 
