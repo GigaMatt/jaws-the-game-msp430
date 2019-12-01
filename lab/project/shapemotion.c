@@ -82,7 +82,7 @@ Layer layer3 = {
 Layer border_field_layer = {
     // Border Outline
     (AbShape *)&boder_outline,
-    {screenWidth / 2+10, (screenHeight / 2)}, /**< center */
+    {screenWidth / 2+10, (screenHeight / 2-10)}, /**< center */
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_BROWN,
