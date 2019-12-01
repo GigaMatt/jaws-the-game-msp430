@@ -199,7 +199,7 @@ void mlAdvance(MovLayer *ml, Region *fence)
         velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
         if (velocity < 0)
         {
-          drawString5x7(13, 35, "JAWS ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35
+          drawString5x7(13, 35, "JAWS     ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35
           buzzer_set_period(1000);
           newPos.axes[axis] += (2 * velocity);
         }
@@ -215,7 +215,7 @@ void mlAdvance(MovLayer *ml, Region *fence)
 }
 
 // System Sets Background Color
-u_int bgColor = COLOR_SEA_GREEN; /**< The background color */
+u_int bgColor = COLOR_BLACK; /**< The background color */
 int redrawScreen = 1;                 /**< Boolean for whether screen needs to be redrawn */
 
 Region fieldFence; /**< fence around playing field  */
