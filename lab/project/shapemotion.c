@@ -366,7 +366,7 @@ void updateSharkPosition(){
   P2IFG = 0;
 }
 void
-__interrupt_vec(PORT2_VECTOR){//Port_2
+__interrupt_vec(PORT2_VECTOR) Port_2(){
   updateSharkPosition();
 }
 
