@@ -105,7 +105,7 @@ Layer human_head_layer = {
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_BROWN,
-    &human_body_layer,
+    0,
 };
 
 // Layer human_head_layer = {
