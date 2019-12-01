@@ -17,6 +17,8 @@
 #include "libTimer.h"
 
 #define GREEN_LED BIT6
+#define SWITCHES 0x0f  //Switches
+
 
 /* PART 1: DEFINE SHAPES FOR THE GAME*/
 
@@ -357,7 +359,7 @@ void updateSharkPosition(){
   default: return;
   }
 
-  changeVelocity( (&x_direction), (&y_direction), direction); //Update new velocity based on direction
+  changeVelocity( (*x_direction), (*y_direction), direction); //Update new velocity based on direction
   shark_move_layer->velocity.axes[0] = x_direction; //Update velocity of the Object
   shark_move_layer->velocity.axes[1] = y_direction; //Update velocity of the Object
   shark_layer->posNext = newposition;
