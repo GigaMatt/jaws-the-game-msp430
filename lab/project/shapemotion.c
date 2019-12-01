@@ -82,7 +82,7 @@ Layer layer3 = {
 Layer border_field_layer = {
     // Border Outline
     (AbShape *)&boder_outline,
-    {screenWidth / 2+10, (screenHeight / 2-10)}, /**< center */
+    {screenWidth / 2, (screenHeight / 2)}, /**< center */
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_BROWN,
@@ -91,7 +91,7 @@ Layer border_field_layer = {
 Layer human_layer = {
     // Swimming Human
     (AbShape *)&rectangle_size_10,                 // Human as
-    {screenWidth / 2 + 40, screenHeight / 2}, // center  + 51
+    {screenWidth / 2 + 80, screenHeight / 2}, // center  + 51
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_BROWN,
