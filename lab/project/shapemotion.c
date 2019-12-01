@@ -45,7 +45,7 @@ int abSlicedRectCheck(const AbRect *rect, const Vec2 *center_position, const Vec
 }
 
 //  Build Objects
-AbRect rectangle_size_10 = {abRectGetBounds, abSlicedRectCheck, {10, 10}}; /**< 10x10 rectangle */
+AbRect rectangle_size_10 = {abRectGetBounds, abSlicedRectCheck, {10, 5}}; /**< 10x10 rectangle */
 AbRArrow right_arrow = {abRArrowGetBounds, abSlicedArrowCheck, 25}; //30
 
 AbRectOutline boder_outline = {
