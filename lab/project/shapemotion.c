@@ -266,16 +266,16 @@ void wdt_c_handler()
 	  switch (buttonPressed) {	
           
 		case 1:
-      //buzzer_play_sound();
+      buzzer_play_sound();
 			break;
 		case 2:
-      //buzzer_play_sound();
+      buzzer_play_sound();
 			break;
 		case 4:
-      //buzzer_play_sound();
+      buzzer_play_sound();
 			break;
 		case 8:
-      //buzzer_play_sound();
+      buzzer_play_sound();
 			break;
 	  }
     mlAdvance(&ml1, &fieldFence);
@@ -286,7 +286,8 @@ void wdt_c_handler()
   P1OUT &= ~GREEN_LED; /**< Green LED off when cpu off */
 }
 
-/* Change Direction According to New Velocity */
+/* 
+// Change Direction According to New Velocity
 void changeSharkDirection(int* x_direction, int* y_direction, int direction)
 {
 
@@ -309,7 +310,7 @@ void changeSharkDirection(int* x_direction, int* y_direction, int direction)
   }
 }
 
-/* Updates Shark's Direction based on the button that is pressed */
+// Updates Shark's Direction based on the button that is pressed
 void updateSharkPosition()
 {
 
@@ -320,7 +321,7 @@ void updateSharkPosition()
   vec2Add(&newposition, &(shark_layer->posNext), &(shark_move_layer->velocity));
   int direction = 0;
 
-  /* Button Press Moves Center Shark */
+  // Button Press Moves Center Shark
   switch((P2IFG & (SWITCHES))){
     // SW1
     case BIT0:
@@ -355,3 +356,4 @@ void updateSharkPosition()
   shark_layer->posNext = newposition;
   P2IFG = 0;
 }
+ */
