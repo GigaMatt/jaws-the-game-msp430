@@ -191,7 +191,6 @@ void mlAdvance(MovLayer *ml, Region *fence)
   {
     vec2Add(&newPos, &ml->layer->posNext, &ml->velocity);
     abShapeGetBounds(ml->layer->abShape, &newPos, &shapeBoundary);
-    drawString5x7(41, 6, "JAWS", COLOR_WHITE, COLOR_BLUE);
     for (axis = 0; axis < 2; axis++)
     {
       if ((shapeBoundary.topLeft.axes[axis] < fence->topLeft.axes[axis]) ||
@@ -201,12 +200,15 @@ void mlAdvance(MovLayer *ml, Region *fence)
         if (velocity < 0)
         {
           drawString5x7(11, 35, "JAWS               ", COLOR_RED, COLOR_GREEN); //prev 5x7 20, 35
+          drawString5x7(20, 35, "IT'S A BAD WEEK     ", COLOR_RED, COLOR_GREEN); //prev 5x7 20, 35
           buzzer_set_period(1000);
           newPos.axes[axis] += (2 * velocity);
         }
         if (velocity > 0)
         {
-          drawString5x7(11, 35, "BAD WEEK TO BE A SEAL", COLOR_RED, COLOR_GREEN); //prev 5x7
+          drawString5x7(11, 35, "JAWS               ", COLOR_RED, COLOR_GREEN); //prev 5x7 20, 35
+          drawString5x7(20, 35, "TO BE A SEAL       ", COLOR_RED, COLOR_GREEN); //prev 5x7
+          
         }
       } /**< if outside of fence */
     }   /**< for axis */
