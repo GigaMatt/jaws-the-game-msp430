@@ -61,7 +61,7 @@ Layer layer4 = {
     // Upper Shark
 
     (AbShape *)&right_arrow,
-    {(screenWidth / 2)+15, (screenHeight / 2)-47}, /**< bit below & right of center +5,+5*/
+    {(screenWidth / 2)+15, (screenHeight / 2)-57}, /**< bit below & right of center +5,+5*/
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_WHITE,
@@ -90,7 +90,7 @@ Layer border_field_layer = {
 
 Layer human_body_layer = {
     // Swimming Human Body
-    (AbShape *)&rectangle_size_7,
+    (AbShape *)&rectangle_size_10,
     {(screenWidth / 2), (screenHeight / 2)-73},
     {0, 0},
     {0, 0}, /* last & next pos */
@@ -100,7 +100,7 @@ Layer human_body_layer = {
 
 Layer human_head_layer = {
     // Swimming Human Body
-    (AbShape *)&circle14,
+    (AbShape *)&rectangle_size_7,
     {(screenWidth / 2), (screenHeight / 2)}, /**< center */
     {0, 0},
     {0, 0}, /* last & next pos */
@@ -199,13 +199,13 @@ void mlAdvance(MovLayer *ml, Region *fence)
         velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
         if (velocity < 0)
         {
-          drawString5x7(13, 35, "JAWS: IT'S A BAD ", COLOR_RED, COLOR_GREEN); //prev 5x7 20, 35
+          drawString5x7(13, 35, "JAWS: IT'S A BAD ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35
           buzzer_set_period(1000);
           newPos.axes[axis] += (2 * velocity);
         }
         if (velocity > 0)
         {
-          drawString5x7(13, 35, "WEEK TO BE A SEAL ", COLOR_RED, COLOR_GREEN); //prev 5x7 20, 35          
+          drawString5x7(13, 35, "WEEK TO BE A SEAL ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35          
         }
       } /**< if outside of fence */
     }   /**< for axis */
@@ -215,7 +215,7 @@ void mlAdvance(MovLayer *ml, Region *fence)
 }
 
 // System Sets Background Color
-u_int bgColor = COLOR_GREEN; /**< The background color */
+u_int bgColor = COLOR_BLACK; /**< The background color */
 int redrawScreen = 1;                 /**< Boolean for whether screen needs to be redrawn */
 
 Region fieldFence; /**< fence around playing field  */
