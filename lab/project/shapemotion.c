@@ -40,15 +40,15 @@ int abSlicedArrowCheck(const AbRArrow *shape, const Vec2 *center_position, const
 
   Vec2 relative_position;
   vec2Sub(&relative_position, pixel, center_position);
-  if (relative_position.axes[1] >= -3 && relative_position.axes[0] / 2 < relative_position.axes[1])//-6
+  if (relative_position.axes[1] >= -3 && relative_position.axes[0] / 2 < relative_position.axes[1])
     return 0;
   else
     return abRArrowCheck(shape, center_position, pixel);
 }
 
 //  Build Objects
-AbRect rectangle_size_10 = {abRectGetBounds, abSlicedRectCheck, {7, 5}}; /**< 10x10 rectangle */
-AbRArrow right_arrow = {abRArrowGetBounds, abSlicedArrowCheck, 25}; //30
+AbRect rectangle_size_10 = {abRectGetBounds, abSlicedRectCheck, {7, 5}};
+AbRArrow right_arrow = {abRArrowGetBounds, abSlicedArrowCheck, 25};
 
 AbRectOutline boder_outline = {
     // Define Border Outline
@@ -253,47 +253,11 @@ void main()
   }
 }
 
-/** Watchdog timer interrupt handler. 15 interrupts/sec */
-// void decisecond()
-// {
-//   static char cnt = 0;
-//   if (++cnt > 2)
-//   {
-//     buzzer_advance_frequency();
-//     cnt = 0;
-//   }
-// }
-
-
 /* Everything Comes Together */
 void wdt_c_handler()
 {
-  //  Transition from State to State
 
-  // static char second_count = 0, decisecond_count = 0;
-  // if (++decisecond_count == 25)
-  // {
-
-  //   buzzer_advance_frequency();
-  //   decisecond_count = 0;
-  // }
-
-  // static short count = 0;
-  // P1OUT |= GREEN_LED; /**< Green LED on when cpu on */
-  // count++;
-  // if (count == 15)
-  // {
-    // Draw Objects on Screen & Play Sounds
-  //   mlAdvance(&ml1, &fieldFence);
-  //   if (p2sw_read())
-  //     redrawScreen = 1;
-  //   count = 0;
-  // }
-  // P1OUT &= ~GREEN_LED; /**< Green LED off when cpu off */
-
-
-	char buttonPressed = p2sw_read();
-    
+	char buttonPressed = p2sw_read();  
   static short count = 0;
   P1OUT |= GREEN_LED;		      /**< Green LED on when cpu on */
   count ++;
@@ -302,30 +266,15 @@ void wdt_c_handler()
 	  switch (buttonPressed) {	
           
 		case 1:
-      //led_state = 0;
-      //sound = 1000;
-      //period = 10;
       //buzzer_play_sound();
-      //led_changed = 1;
-      //led_advance();
-      //led_update();
-      //switch_state_down = 1;
-			// mlAdvance(&moveLeft, &fieldFence, &mlfrog);
-			// movLayerDraw(&moveLeft, &frog);
 			break;
 		case 2:
-			// mlAdvance(&moveRight, &fieldFence, &mlfrog);
-			// movLayerDraw(&moveRight, &frog);
       //buzzer_play_sound();
 			break;
 		case 4:
-			// mlAdvance(&moveUp, &fieldFence, &mlfrog);
-			// movLayerDraw(&moveUp, &frog);
       //buzzer_play_sound();
 			break;
 		case 8:
-			// mlAdvance(&moveDown, &fieldFence, &mlfrog);
-			// movLayerDraw(&moveDown, &frog);
       //buzzer_play_sound();
 			break;
 	  }
@@ -337,52 +286,72 @@ void wdt_c_handler()
   P1OUT &= ~GREEN_LED; /**< Green LED off when cpu off */
 }
 
-//Changes the direction the pacman is moving based on what button was pressed
-void updateSharkPosition(){
-  MovLayer* shark_move_layer = &ml4; //Center Shark's MovLayer`// Could also me ml4? or mml0?
+/* Change Direction According to New Velocity */
+void changeSharkDirection(int* x_direction, int* y_direction, int direction)
+{
+
+  switch( direction ){
+    // Move Up
+    case 1: (*x_direction) = 0; (*y_direction) = -3; 
+    break;
+    // Move Down
+    case 2: (*x_direction) = 0; (*y_direction) = 3; 
+    break;
+    // Move Left
+    case 3: (*x_direction) = 3; (*y_direction) = 0; 
+    break;
+    // Move Right
+    case 4: (*x_direction) = -3; (*y_direction) = 0;
+    break;
+    // Center
+    default:
+    (*x_direction) = 5; (*y_direction) = 5;
+  }
+}
+
+/* Updates Shark's Direction based on the button that is pressed */
+void updateSharkPosition()
+{
+
+  MovLayer* shark_move_layer = &ml4; //Center Shark's MovLayer
   Layer* shark_layer = &center_shark_layer; 
   Vec2 newposition;
   int x_direction, y_direction;
   vec2Add(&newposition, &(shark_layer->posNext), &(shark_move_layer->velocity));
   int direction = 0;
 
-  //direction pacman will go to depending on whats pressed
+  /* Button Press Moves Center Shark */
   switch((P2IFG & (SWITCHES))){
-  case BIT0: direction = 1; 
-  break; //Button 1
-  case BIT1: direction = 2; 
-  break; //Button 2
-  case BIT2: direction = 3; 
-  break; //Button 3
-  case BIT3: direction = 4; 
-  break; //Button 4
-  default: return;
+    // SW1
+    case BIT0:
+    direction = 1; 
+    break;
+    
+    // SW2
+    case BIT1:
+    direction = 2; 
+    break;
+    
+    // SW3
+    case BIT2:
+    direction = 3; 
+    break;
+    
+    // SW4
+    case BIT3: 
+    direction = 4; 
+    break;
+    
+    // Default
+    default:
+    return;
   }
 
-  changeVelocity(&x_direction, &y_direction, direction); //Update new velocity based on direction
-  shark_move_layer->velocity.axes[0] = x_direction; //Update velocity of the Object
-  shark_move_layer->velocity.axes[1] = y_direction; //Update velocity of the Object
+  // Change according to new velocity
+  changeSharkDirection(&x_direction, &y_direction, direction);
+  updateSharkPosition();
+  shark_move_layer->velocity.axes[0] = x_direction; // Change x-directional velocity
+  shark_move_layer->velocity.axes[1] = y_direction; // Change y-directional velocity
   shark_layer->posNext = newposition;
   P2IFG = 0;
 }
-// void
-// __interrupt_vec(PORT2_VECTOR) Port_2(){
-//   updateSharkPosition();
-// }
-
-
-//velocity x and velocity y is changed to match the direction
-void changeVelocity(int* x_direction, int* y_direction, int direction){
-  switch( direction ){
-  case 1: (*x_direction) = 0; (*y_direction) = -3; 
-  break; //up
-  case 2: (*x_direction) = 0; (*y_direction) = 3; 
-  break; //down
-  case 3: (*x_direction) = -3; (*y_direction) = 0; 
-  break; //right
-  case 4: (*x_direction) = 3; (*y_direction) = 0;
-  break; //left
-  default: (*x_direction) = 5; (*y_direction) = 5;
-  }
-}
-
