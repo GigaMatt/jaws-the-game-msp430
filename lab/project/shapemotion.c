@@ -72,7 +72,7 @@ Layer upper_shark_layer = {
     // Shark Eating Human
 
     (AbShape *)&right_arrow,
-    {(screenWidth / 2) -20, (screenHeight / 2)-60}, /**< bit below & right of center +10,+61*/
+    {(screenWidth / 2) -25, (screenHeight / 2)-60}, /**< bit below & right of center +10,+61*/
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_GRAY,
