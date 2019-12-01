@@ -267,14 +267,14 @@ void main()
 //   }
 // }
 
-// void wdt_c_handler()
-// {
-//   static char second_count = 0, decisecond_count = 0;
-//   if (++decisecond_count == 25)
-//   {
-//     buzzer_advance_frequency();
-//     decisecond_count = 0;
-//   }
+void wdt_c_handler()
+{
+  // static char second_count = 0, decisecond_count = 0;
+  // if (++decisecond_count == 25)
+  // {
+  //   buzzer_advance_frequency();
+  //   decisecond_count = 0;
+  }
 
 //   static short count = 0;
 //   P1OUT |= GREEN_LED; /**< Green LED on when cpu on */
