@@ -124,8 +124,8 @@ typedef struct MovLayer_s
 /* initial value of {0,0} will be overwritten */
 MovLayer ml3 = {&upper_shark_layer, {2, 0}, 0};   // Upper Shark Chases Human
 MovLayer ml1 = {&human_body_layer, {1, 0}, &ml3}; // Human Swims Back & Forth
-MovLayer ml0 = {&human_head_layer, {1, 0}, &ml1};
-MovLayer ml4 = {&lower_shark_layer, {2,0}, &ml0 };  // Bottom Shark Swims for Prey
+MovLayer ml4 = {&lower_shark_layer, {2,0}, &ml1};  // Bottom Shark Swims for Prey
+MovLayer ml0 = {&human_head_layer, {1, 0}, &ml4};
 
 void movLayerDraw(MovLayer *movLayers, Layer *layers)
 {
