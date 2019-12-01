@@ -124,8 +124,8 @@ typedef struct MovLayer_s
 /* initial value of {0,0} will be overwritten */
 MovLayer ml3 = {&upper_shark_layer, {2, 0}, 0};   // Upper Shark Chases Human
 MovLayer ml1 = {&human_body_layer, {1, 0}, &ml3}; // Human Swims Back & Forth
-//MovLayer ml0 = {&human_head_layer, {1, 0}, &ml1};
-MovLayer ml4 = {&lower_shark_layer, {2,1}, &ml1}; //  Bottom Shark Swims For Prey
+MovLayer ml0 = {&human_head_layer, {1, 0}, &ml1};
+MovLayer ml4 = {&lower_shark_layer, {2,1}, &ml0 };  // Bottom Shark Swims for Prey
 
 void movLayerDraw(MovLayer *movLayers, Layer *layers)
 {
@@ -242,7 +242,7 @@ void main()
     }
     P1OUT |= GREEN_LED; /**< Green led on when CPU on */
     redrawScreen = 0;
-    //movLayerDraw(&ml0, &human_head_layer);
+    movLayerDraw(&ml0, &human_head_layer);
   }
 }
 
