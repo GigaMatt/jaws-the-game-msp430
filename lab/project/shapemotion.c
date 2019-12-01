@@ -58,7 +58,7 @@ AbRectOutline boder_outline = {
 
 /* Define Layers for objects */
 Layer lower_shark_layer = {
-    // Upper Shark
+    // Lower Shark
 
     (AbShape *)&right_arrow,
     {(screenWidth / 2)+10, (screenHeight / 2)+61}, /**< bit below & right of center +15-57*/
@@ -69,10 +69,10 @@ Layer lower_shark_layer = {
 };
 
 Layer upper_shark_layer = {
-    // Lower Shark
+    // Shark Eating Human
 
     (AbShape *)&right_arrow,
-    {(screenWidth / 2) +15, (screenHeight / 2)-60}, /**< bit below & right of center +10,+61*/
+    {(screenWidth / 2) +30, (screenHeight / 2)-60}, /**< bit below & right of center +10,+61*/
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_GRAY,
