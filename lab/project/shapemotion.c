@@ -177,6 +177,8 @@ void mlAdvance(MovLayer *ml, Region *fence)
   int velocity;
   for (; ml; ml = ml->next)
   {
+    // Collisions
+    
     vec2Add(&newPos, &ml->layer->posNext, &ml->velocity);
     abShapeGetBounds(ml->layer->abShape, &newPos, &shapeBoundary);
     for (axis = 0; axis < 2; axis++)
@@ -273,18 +275,71 @@ void wdt_c_handler()
   //   decisecond_count = 0;
   // }
 
-  static short count = 0;
-  P1OUT |= GREEN_LED; /**< Green LED on when cpu on */
-  count++;
-  if (count == 15)
-  {
+  // static short count = 0;
+  // P1OUT |= GREEN_LED; /**< Green LED on when cpu on */
+  // count++;
+  // if (count == 15)
+  // {
     // Draw Objects on Screen & Play Sounds
-    mlAdvance(&ml1, &fieldFence);
+  //   mlAdvance(&ml1, &fieldFence);
+  //   if (p2sw_read())
+  //     redrawScreen = 1;
+  //   count = 0;
+  // }
+  // P1OUT &= ~GREEN_LED; /**< Green LED off when cpu off */
 
+
+	char buttonPressed = 15 - p2sw_read();
+    
+    
+    
+    
+    //char buttonPressed = p2sw_read();
+    //ask*************************************************************
+    
+  static short count = 0;
+  P1OUT |= GREEN_LED;		      /**< Green LED on when cpu on */
+  count ++;
+  if (count == 50) {
+
+	  switch (buttonPressed) {	
+          
+		case 1:
+      //led_state = 0;
+      //sound = 1000;
+      //period = 10;
+      buzzer_play_sound();
+      //led_changed = 1;
+      //led_advance();
+      //led_update();
+      //switch_state_down = 1;
+			// mlAdvance(&moveLeft, &fieldFence, &mlfrog);
+			// movLayerDraw(&moveLeft, &frog);
+			break;
+		case 2:
+			// mlAdvance(&moveRight, &fieldFence, &mlfrog);
+			// movLayerDraw(&moveRight, &frog);
+      buzzer_play_sound();
+			break;
+		case 4:
+			// mlAdvance(&moveUp, &fieldFence, &mlfrog);
+			// movLayerDraw(&moveUp, &frog);
+      buzzer_play_sound();
+			break;
+		case 8:
+			// mlAdvance(&moveDown, &fieldFence, &mlfrog);
+			// movLayerDraw(&moveDown, &frog);
+      buzzer_play_sound();
+			break;
+	  }
+    mlAdvance(&ml1, &fieldFence);
     if (p2sw_read())
       redrawScreen = 1;
     count = 0;
   }
-
   P1OUT &= ~GREEN_LED; /**< Green LED off when cpu off */
+
+
+
+
 }

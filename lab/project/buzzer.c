@@ -3,10 +3,10 @@
 #include "buzzer.h"
 //#include "switches.h"
 
-static unsigned int period =1000;
-static signed int rate = 200;
-#define MIN_PERIOD 1000
-#define MAX_PERIOD 4000
+#define MIN_SONG_LENGTH 900
+#define MAX_SONG_LENGTH 90000
+static unsigned int song_length = 2500;
+static signed int change_rate = 250;
 
 void buzzer_init()
 {
@@ -26,14 +26,25 @@ void buzzer_init()
     // buzzer_set_period(1000);	/* start buzzing!!! */
 }
 
-void buzzer_advance_frequency(){
-  period += rate;
-  if((rate > 0 && (period > MAX_PERIOD)) || ( rate < 0 && (period < MIN_PERIOD))){
-    rate = -rate;
-    period += (rate << 1);
-
+void buzzer_play_sound()
+{
+  song_length = (song_length+change_rate);
+  // Positive Change Rate
+  if(change_rate>0){
+    if(song_length>MAX_SONG_LENGTH){
+      change_rate = -change_rate;                   // Decrement the change
+      song_length = song_length+(change_rate << 1);  // Shift 
+    }
   }
-  buzzer_set_period(period);
+
+  // Negative Change Rate
+  if(change_rate<0){
+    if(song_length<MAX_SONG_LENGTH){
+      change_rate = -change_rate;                   // Decrement the change
+      song_length = song_length+(change_rate << 1);  // Shift 
+    }
+  }
+  buzzer_set_period(song_length);
 }
 
 void buzzer_set_period(short cycles)
