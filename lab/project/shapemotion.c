@@ -64,7 +64,7 @@ Layer layer4 = {
     {(screenWidth / 2)+10, (screenHeight / 2)+61}, /**< bit below & right of center +15-57*/
     {0, 0},
     {0, 0}, /* last & next pos */
-    COLOR_BLUE,
+    COLOR_WHITE,
     0,
 };
 
@@ -75,7 +75,7 @@ Layer lower_shark_layer = {
     {(screenWidth / 2) +15, (screenHeight / 2)-57}, /**< bit below & right of center +10,+61*/
     {0, 0},
     {0, 0}, /* last & next pos */
-    COLOR_NAVY,
+    COLOR_GRAY,
     &layer4,
 };
 
