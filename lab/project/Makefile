@@ -10,16 +10,11 @@ AS              = msp430-elf-gcc -mmcu=${CPU} -c
 all:shapemotion.elf
 
 #additional rules for files
-shapemotion.elf: ${COMMON_OBJECTS} shapemotion.o buzzer.o wdt_handler.o stateMachines.o led.o  switches.o ../timerLib/libTimer.a
+shapemotion.elf: ${COMMON_OBJECTS} shapemotion.o buzzer.o wdt_handler.o
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ -lTimer -lLcd -lShape -lCircle -lp2sw
 
 load: shapemotion.elf
 	mspdebug rf2500 "prog $^"
 
 clean:
-	rm -f -r *.o *.elf *shell* *shell*~ *~
-	(cd ../timerLib; make clean)
-stateMachines.o: stateMachines.c stateMachines.h
-led.o: led.c led.h
-switches.o: switches.c switches.h
-buzzer.o: buzzer.c buzzer.h
+	rm -f *.o *.elf
