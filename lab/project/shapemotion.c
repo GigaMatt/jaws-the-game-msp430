@@ -64,7 +64,7 @@ Layer layer4 = {
     {(screenWidth / 2)+18, (screenHeight / 2)-73}, /**< bit below & right of center +5,+5*/
     {0, 0},
     {0, 0}, /* last & next pos */
-    COLOR_WHITE,
+    COLOR_BROWN,
     0,
 };
 
@@ -72,10 +72,10 @@ Layer lower_shark_layer = {
     // Lower Shark
 
     (AbShape *)&right_arrow,
-    {(screenWidth / 2)+15, (screenHeight / 2)-47}, /**< bit below & right of center +10,+61 */
+    {(screenWidth / 2)+15, (screenHeight / 2)-50}, /**< bit below & right of center +10,+61 */
     {0, 0},
     {0, 0}, /* last & next pos */
-    COLOR_BLUE,
+    COLOR_WHITE,
     &layer4,
 };
 
@@ -104,7 +104,7 @@ Layer human_head_layer = {
     {(screenWidth / 2), (screenHeight / 2)}, /**< center */
     {0, 0},
     {0, 0}, /* last & next pos */
-    COLOR_BROWN,
+    COLOR_BLACK,
     &human_body_layer,
 };
 
