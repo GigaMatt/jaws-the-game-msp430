@@ -61,7 +61,7 @@ Layer lower_shark_layer = {
     // Lower Shark
 
     (AbShape *)&right_arrow,
-    {(screenWidth / 2)+10, (screenHeight / 2)+61}, /**< bit below & right of center +15-57*/
+    {(screenWidth / 2)+10, (screenHeight / 2)}, /**< bit below & right of center +15+61*/
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_WHITE,
@@ -196,7 +196,7 @@ void mlAdvance(MovLayer *ml, Region *fence)
         }
         if (velocity > 0)
         {
-          drawString5x7(32, 75, "CIRCA 1975 ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35          
+          drawString5x7(62, 75, "CIRCA 1975 ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35          
         }
       } /**< if outside of fence */
     }   /**< for axis */
