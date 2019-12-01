@@ -191,7 +191,7 @@ void mlAdvance(MovLayer *ml, Region *fence)
         {
           
           //Trigger Buzzer
-          buzzer_play_sound();
+          //buzzer_play_sound();
 
           drawString5x7(22, 55, "JAWS: THE GAME ", COLOR_RED, COLOR_BLACK);
           newPos.axes[axis] += (2 * velocity);
