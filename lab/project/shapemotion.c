@@ -17,7 +17,7 @@
 #include "libTimer.h"
 #include "led.h"
 #include "switches.h"
-#include "statemachines.h"
+#include "stateMachines.h"
 
 #define GREEN_LED BIT6
 
