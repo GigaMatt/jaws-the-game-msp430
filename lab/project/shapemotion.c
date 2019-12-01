@@ -125,7 +125,7 @@ typedef struct MovLayer_s
 MovLayer ml3 = {&upper_shark_layer, {1, 0}, 0}; /**< not all layers move */
 MovLayer ml1 = {&human_body_layer, {0, 0}, &ml3};
 MovLayer ml0 = {&human_head_layer, {0, 0}, &ml1};
-//MovLayer ml4 = { &lower_shark_layer, {2,1}, &ml0 };
+MovLayer ml4 = {&lower_shark_layer, {2,1}, &ml0 };
 
 void movLayerDraw(MovLayer *movLayers, Layer *layers)
 {
@@ -190,7 +190,7 @@ void mlAdvance(MovLayer *ml, Region *fence)
         velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
         if (velocity < 0)
         {
-          drawString5x7(20, 55, "JAWS: THE GAME ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35
+          drawString5x7(22, 55, "JAWS: THE GAME ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35
           buzzer_set_period(1000);
           newPos.axes[axis] += (2 * velocity);
         }
