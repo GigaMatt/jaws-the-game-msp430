@@ -88,7 +88,7 @@ Layer border_field_layer = {
     COLOR_BROWN,
     &layer3};
 
-Layer layer1 = {
+Layer human_layer = {
     // Swimming Human
     (AbShape *)&rectangle_size_10,                 // Human as
     {screenWidth / 2 + 40, screenHeight / 2 + 51}, /**< center */
@@ -105,7 +105,7 @@ Layer layer0 = {
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_WHITE,
-    &layer1,
+    &human_layer,
 };
 
 // Layer layer0 = {
@@ -115,7 +115,7 @@ Layer layer0 = {
 //     {0, 0},
 //     {0, 0}, /* last & next pos */
 //     COLOR_YELLOW,
-//     &layer1,
+//     &human_layer,
 // };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -132,7 +132,7 @@ typedef struct MovLayer_s
 
 /* initial value of {0,0} will be overwritten */
 MovLayer ml3 = {&layer3, {1, 0}, 0}; /**< not all layers move */
-MovLayer ml1 = {&layer1, {0, 0}, &ml3};
+MovLayer ml1 = {&human_layer, {0, 0}, &ml3};
 MovLayer ml0 = {&layer0, {0, 0}, &ml1};
 //MovLayer ml4 = { &layer4, {2,1}, &ml0 };
 
@@ -232,8 +232,8 @@ void main()
 
   shapeInit();
 
-  layerInit(&layer1);
-  layerDraw(&layer1);
+  layerInit(&human_layer);
+  layerDraw(&human_layer);
 
   buzzer_init();
 
@@ -268,6 +268,7 @@ void main()
 // }
 
 
+/* Everything Comes Together */
 void wdt_c_handler()
 {
   //  Transition from State to State
