@@ -237,10 +237,10 @@ void main()
   {
     while (!redrawScreen)
     {                      /**< Pause CPU if screen doesn't need updating */
-      P1OUT &= ~GREEN_LED; /**< Green led off witHo CPU */
+      //P1OUT &= ~GREEN_LED; /**< Green led off witHo CPU */
       or_sr(0x10);         /**< CPU OFF */
     }
-    P1OUT |= GREEN_LED; /**< Green led on when CPU on */
+    //P1OUT |= GREEN_LED; /**< Green led on when CPU on */
     redrawScreen = 0;
 
     // Draw Base Layer
@@ -275,7 +275,7 @@ void wdt_c_handler()
   // }
 
   static short count = 0;
-  P1OUT |= GREEN_LED; /**< Green LED on when cpu on */
+  //P1OUT |= GREEN_LED; /**< Green LED on when cpu on */
   count++;
   if (count == 15)
   {
@@ -288,5 +288,5 @@ void wdt_c_handler()
     count = 0;
   }
 
-  P1OUT &= ~GREEN_LED; /**< Green LED off when cpu off */
+  //P1OUT &= ~GREEN_LED; /**< Green LED off when cpu off */
 }
