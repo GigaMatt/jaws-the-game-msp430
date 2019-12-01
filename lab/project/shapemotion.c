@@ -101,7 +101,7 @@ Layer human_body_layer = {
 Layer human_head_layer = {
     // Swimming Human Body
     (AbShape *)&circle14,
-    {screenWidth / 2+15, screenHeight / 2}-73, /**< center */
+    {(screenWidth / 2)+15, (screenHeight / 2)-73}, /**< center */
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_BROWN,
