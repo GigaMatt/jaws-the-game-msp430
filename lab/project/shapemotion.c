@@ -61,7 +61,7 @@ Layer layer4 = {
     // Upper Shark
 
     (AbShape *)&right_arrow,
-    {(screenWidth / 2)+15, (screenHeight / 2)-57}, /**< bit below & right of center +5,+5*/
+    {(screenWidth / 2)+10, (screenHeight / 2)+61}, /**< bit below & right of center +15-57*/
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_WHITE,
@@ -72,7 +72,7 @@ Layer lower_shark_layer = {
     // Lower Shark
 
     (AbShape *)&right_arrow,
-    {(screenWidth / 2) + 10, (screenHeight / 2) + 61}, /**< bit below & right of center */
+    {(screenWidth / 2) +15, (screenHeight / 2)-57}, /**< bit below & right of center +10,+61*/
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_BLUE,
@@ -199,13 +199,13 @@ void mlAdvance(MovLayer *ml, Region *fence)
         velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
         if (velocity < 0)
         {
-          drawString5x7(13, 35, "JAWS: IT'S A BAD ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35
+          drawString5x7(13, 35, "JAWS:\n", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35
           buzzer_set_period(1000);
           newPos.axes[axis] += (2 * velocity);
         }
         if (velocity > 0)
         {
-          drawString5x7(13, 35, "WEEK TO BE A SEAL ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35          
+          drawString5x7(13, 35, "The Ultimate Predator", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35          
         }
       } /**< if outside of fence */
     }   /**< for axis */
