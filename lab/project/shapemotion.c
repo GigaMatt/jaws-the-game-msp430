@@ -72,7 +72,7 @@ Layer lower_shark_layer = {
     // Lower Shark
 
     (AbShape *)&right_arrow,
-    {(screenWidth / 2) +15, (screenHeight / 2)-57}, /**< bit below & right of center +10,+61*/
+    {(screenWidth / 2) +15, (screenHeight / 2)-65}, /**< bit below & right of center +10,+61*/
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_GRAY,
