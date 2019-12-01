@@ -261,7 +261,7 @@ void wdt_c_handler()
   static short count = 0;
   P1OUT |= GREEN_LED;		      /**< Green LED on when cpu on */
   count ++;
-  if (count == 50) {
+  if (count >= 16) {
 
 	  switch (buttonPressed) {	
           
