@@ -46,7 +46,7 @@ int abSlicedRectCheck(const AbRect *rect, const Vec2 *center_position, const Vec
 
 //  Build Objects
 AbRect rectangle_size_10 = {abRectGetBounds, abSlicedRectCheck, {10, 10}}; /**< 10x10 rectangle */
-AbRect rectangle_size_7 = {abRectGetBounds, abSlicedRectCheck, {15, 7}};    /**< 7x7 human rectangle */
+AbRect rectangle_size_7 = {abRectGetBounds, abSlicedRectCheck, {7, 7}};    /**< 7x7 human rectangle */
 AbRArrow right_arrow = {abRArrowGetBounds, abSlicedArrowCheck, 30};
 
 AbRectOutline boder_outline = {
@@ -60,11 +60,11 @@ AbRectOutline boder_outline = {
 Layer layer4 = {
     // Upper Shark
 
-    (AbShape *)&circle14,
-    {(screenWidth / 2)+18, (screenHeight / 2)-73}, /**< bit below & right of center +5,+5*/
+    (AbShape *)&right_arrow,
+    {(screenWidth / 2)+15, (screenHeight / 2)-47}, /**< bit below & right of center +5,+5*/
     {0, 0},
     {0, 0}, /* last & next pos */
-    COLOR_BROWN,
+    COLOR_WHITE,
     0,
 };
 
@@ -72,10 +72,10 @@ Layer lower_shark_layer = {
     // Lower Shark
 
     (AbShape *)&right_arrow,
-    {(screenWidth / 2)+15, (screenHeight / 2)-50}, /**< bit below & right of center +10,+61 */
+    {(screenWidth / 2) + 10, (screenHeight / 2) + 61}, /**< bit below & right of center */
     {0, 0},
     {0, 0}, /* last & next pos */
-    COLOR_WHITE,
+    COLOR_BLUE,
     &layer4,
 };
 
@@ -104,7 +104,7 @@ Layer human_head_layer = {
     {(screenWidth / 2), (screenHeight / 2)}, /**< center */
     {0, 0},
     {0, 0}, /* last & next pos */
-    COLOR_BLACK,
+    COLOR_BROWN,
     &human_body_layer,
 };
 
@@ -199,13 +199,13 @@ void mlAdvance(MovLayer *ml, Region *fence)
         velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
         if (velocity < 0)
         {
-          drawString5x7(13, 35, "JAWS: IT'S A BAD\n", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35
+          drawString5x7(13, 35, "JAWS: IT'S A BAD ", COLOR_RED, COLOR_GREEN); //prev 5x7 20, 35
           buzzer_set_period(1000);
           newPos.axes[axis] += (2 * velocity);
         }
         if (velocity > 0)
         {
-          drawString5x7(13, 35, "WEEK TO BE A SEAL\n", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35          
+          drawString5x7(13, 35, "WEEK TO BE A SEAL ", COLOR_RED, COLOR_GREEN); //prev 5x7 20, 35          
         }
       } /**< if outside of fence */
     }   /**< for axis */
@@ -215,7 +215,7 @@ void mlAdvance(MovLayer *ml, Region *fence)
 }
 
 // System Sets Background Color
-u_int bgColor = COLOR_BLACK; /**< The background color */
+u_int bgColor = COLOR_GREEN; /**< The background color */
 int redrawScreen = 1;                 /**< Boolean for whether screen needs to be redrawn */
 
 Region fieldFence; /**< fence around playing field  */
