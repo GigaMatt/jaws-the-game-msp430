@@ -1,17 +1,19 @@
-# Project 3: BabySharkScales LCD Game
+# Project 3: JAWS, THE GAME
 ## Overview
 The objective for this project is to use the MSP430 Microcontroller and our creativity to design a Chritmas Toy. Each MSP430 board is equipped with buttons, an LCD, LEDs, and a speaker. Utilizing these features and our knowledge of I/O, develop a game for the LCD screen.
 
-![Baby-Yoda-Meme](/extras/download.jpeg)
+![Jaws-Promo-Image](/extras/jaws-promo-image.jpg)
 
-**BabySharkScales** is the (un)Natural Christmas toy for every good little girl and good little boy. With notes that represent musical scales and tiny sharks that roll across the screen, BabySharkScales ensures your family is no longer driven insane by the constant tune of Christmas Carols but by the same notes that every musician learns on their way to greatness!
+**JAWS, THE GAME** is inspired by the 1975 Steven Spielberg thriller-film that remains a quintessential part of pop culture, through Discovery Channel's annual _Shark Week_ summer TV event. As they say during Shark Week, "it's a bad week to be a seal!"
+
+If your gift-giving is as untraditional as I am, _Jaws, The Game_ is the (un)Natural Christmas toy for almost any adult. With graphical sharks representative of an time long past, and physical buttons that alter the tenor of sound as you play, _Jaws, The Game_ is sure to take you back this holiday season, while ensuring your children learn about some of Hollywood's greatest films!
 
 ## Features
-BabySharkScales will:
-1. Dynamically render graphical elements that move and change
+_JAWS, THE GAME_ will:
+1. Dynamically render graphical elements that move and change directions
 2. Handle colisions properly with other shapes and area boundaries
 3. Produce sounds triggered by game events such that the game does not pause
-4. Communicate with the player using text
+4. Communicate with the player using on-screen text
 5. Include a state machine written in assembly language
 6. Respond to user input (from buttons)
 
