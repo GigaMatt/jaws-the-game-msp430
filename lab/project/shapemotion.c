@@ -180,7 +180,7 @@ void movLayerDraw(MovLayer *movLayers, Layer *layers)
 
 //Region fence = {{10,30}, {SHORT_EDGE_PIXELS-10, LONG_EDGE_PIXELS-10}}; /**< Create a fence region */
 
-/* SYSTEM MOVES THE SHARKS WITHIN THE DEFINED FENCE */
+/* Instructions on Re-Drawing the Screen */
 void mlAdvance(MovLayer *ml, Region *fence)
 {
   Vec2 newPos;
@@ -291,6 +291,7 @@ void wdt_c_handler()
     // Draw Objects on Screen
 
     mlAdvance(&ml1, &fieldFence);
+    mlAdvance(&ml3, &fieldFence);
     if (p2sw_read())
       redrawScreen = 1;
     count = 0;
