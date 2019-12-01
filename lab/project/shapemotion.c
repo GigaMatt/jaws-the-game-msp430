@@ -190,8 +190,8 @@ void mlAdvance(MovLayer *ml, Region *fence)
         if (velocity < 0)
         {
           
-          // Trigger Buzzer
-          //buzzer_set_period(1000);
+          //Trigger Buzzer
+          buzzer_play_sound();
 
           drawString5x7(22, 55, "JAWS: THE GAME ", COLOR_RED, COLOR_BLACK);
           newPos.axes[axis] += (2 * velocity);
@@ -289,13 +289,7 @@ void wdt_c_handler()
   // P1OUT &= ~GREEN_LED; /**< Green LED off when cpu off */
 
 
-	char buttonPressed = 15 - p2sw_read();
-    
-    
-    
-    
-    //char buttonPressed = p2sw_read();
-    //ask*************************************************************
+	char buttonPressed = p2sw_read();
     
   static short count = 0;
   P1OUT |= GREEN_LED;		      /**< Green LED on when cpu on */
