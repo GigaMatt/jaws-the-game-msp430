@@ -20,17 +20,9 @@
 
 /* PART 1: DEFINE SHAPES FOR THE GAME*/
 
-int abSlicedArrowCheck(const AbRArrow *shape, const Vec2 *center_position, const Vec2 *pixel)
-{
-  // Arrow for Shark Head
-
-  Vec2 relative_position;
-  vec2Sub(&relative_position, pixel, center_position);
-  if (relative_position.axes[1] >= -3 && relative_position.axes[0] / 2 < relative_position.axes[1])//-6
-    return 0;
-  else
-    return abRArrowCheck(shape, center_position, pixel);
-}
+//  Build Objects
+AbRect rectangle_size_10 = {abRectGetBounds, abSlicedRectCheck, {7, 5}}; /**< 10x10 rectangle */
+AbRArrow right_arrow = {abRArrowGetBounds, abSlicedArrowCheck, 25}; //30
 
 int abSlicedRectCheck(const AbRect *rect, const Vec2 *center_position, const Vec2 *pixel)
 {
@@ -44,9 +36,19 @@ int abSlicedRectCheck(const AbRect *rect, const Vec2 *center_position, const Vec
     return abRectCheck(rect, center_position, pixel);
 }
 
-//  Build Objects
-AbRect rectangle_size_10 = {abRectGetBounds, abSlicedRectCheck, {7, 5}}; /**< 10x10 rectangle */
-AbRArrow right_arrow = {abRArrowGetBounds, abSlicedArrowCheck, 25}; //30
+int abSlicedArrowCheck(const AbRArrow *shape, const Vec2 *center_position, const Vec2 *pixel)
+{
+  // Arrow for Shark Head
+
+  Vec2 relative_position;
+  vec2Sub(&relative_position, pixel, center_position);
+  if (relative_position.axes[1] >= -3 && relative_position.axes[0] / 2 < relative_position.axes[1])//-6
+    return 0;
+  else
+    return abRArrowCheck(shape, center_position, pixel);
+}
+
+
 
 AbRectOutline boder_outline = {
     // Define Border Outline
