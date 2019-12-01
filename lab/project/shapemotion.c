@@ -226,6 +226,7 @@ void main()
 
   layerInit(&human_body_layer);
   layerDraw(&human_body_layer);
+  p2sw_init(SWITCHES);
 
   buzzer_init();
 
@@ -332,8 +333,54 @@ void wdt_c_handler()
     count = 0;
   }
   P1OUT &= ~GREEN_LED; /**< Green LED off when cpu off */
-
-
-
-
 }
+
+//Changes the direction the pacman is moving based on what button was pressed
+void updateSharkPosition(){
+  MovLayer* shark_move_layer = &ml4; //Center Shark's MovLayer`// Could also me ml4? or mml0?
+  Layer* shark_layer = &center_shark_layer; 
+  Vec2 newposition;
+  int x_direction, y_direction;
+  vec2Add(&newposition, &(shark_layer->posNext), &(shark_move_layer->velocity));
+  int direction = 0;
+
+  //direction pacman will go to depending on whats pressed
+  switch((P2IFG & (SWITCHES))){
+  case BIT0: direction = 1; 
+  break; //Button 1
+  case BIT1: direction = 2; 
+  break; //Button 2
+  case BIT2: direction = 3; 
+  break; //Button 3
+  case BIT3: direction = 4; 
+  break; //Button 4
+  default: return;
+  }
+
+  changeVelocity( (&x_direction), (&y_direction), direction); //Update new velocity based on direction
+  shark_move_layer->velocity.axes[0] = x_direction; //Update velocity of the Object
+  shark_move_layer->velocity.axes[1] = y_direction; //Update velocity of the Object
+  shark_layer->posNext = newposition;
+  P2IFG = 0;
+}
+void
+__interrupt_vec(PORT2_VECTOR) Port_2(){
+  updateSharkPosition();
+}
+
+
+//velocity x and velocity y is changed to match the direction
+void changeVelocity(int* x_direction, int* y_direction, int direction){
+  switch( direction ){
+  case 1: (*x_direction) = 0; (*y_direction) = -3; 
+  break; //up
+  case 2: (*x_direction) = 0; (*y_direction) = 3; 
+  break; //down
+  case 3: (*x_direction) = -3; (*y_direction) = 0; 
+  break; //right
+  case 4: (*x_direction) = 3; (*y_direction) = 0;
+  break; //left
+  default: (*x_direction) = 5; (*y_direction) = 5;
+  }
+}
+
