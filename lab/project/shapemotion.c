@@ -228,7 +228,7 @@ void main()
 
   layerInit(&human_body_layer);
   layerDraw(&human_body_layer);
-  p2sw_init(SWITCHES);
+  //p2sw_init(SWITCHES);
 
   buzzer_init();
 
