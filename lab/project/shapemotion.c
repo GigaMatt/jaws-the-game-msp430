@@ -104,7 +104,7 @@ Layer human_head_layer = {
     {(screenWidth / 2), (screenHeight / 2)}, /**< center */
     {0, 0},
     {0, 0}, /* last & next pos */
-    COLOR_BROWN,
+    COLOR_SEA_GREEN,
     &human_body_layer,
 };
 
