@@ -18,7 +18,7 @@
 
 #define GREEN_LED BIT6
 
-/* Defined Modified Shapes for Shark*/
+/* PART 1: DEFINE SHAPES FOR THE GAME*/
 
 int abSlicedArrowCheck(const AbRArrow *shape, const Vec2 *center_position, const Vec2 *pixel)
 {
@@ -57,8 +57,8 @@ AbRectOutline boder_outline = {
     {screenWidth / 2 - 10, screenHeight / 2 - 15}};
 
 /* Define Layers for objects */
-Layer lower_shark_layer = {
-    // Lower Shark
+Layer center_shark_layer = {
+    // Center White Shark
 
     (AbShape *)&right_arrow,
     {(screenWidth / 2)+10, (screenHeight / 2)},
@@ -69,14 +69,14 @@ Layer lower_shark_layer = {
 };
 
 Layer upper_shark_layer = {
-    // Shark Eating Human
+    // Upper Hungry Shark
 
     (AbShape *)&right_arrow,
     {(screenWidth / 2) -25, (screenHeight / 2)-60},
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_GRAY,
-    &lower_shark_layer,
+    &center_shark_layer,
 };
 
 Layer border_field_layer = {
@@ -100,7 +100,7 @@ Layer human_body_layer = {
 
 Layer human_head_layer = {
     // Swimming Human Body
-    (AbShape *)&rectangle_size_7,
+    (AbShape *)&rectangle_size_10,
     {(screenWidth / 2), (screenHeight / 2)}, /**< center */
     {0, 0},
     {0, 0}, /* last & next pos */
@@ -109,11 +109,9 @@ Layer human_head_layer = {
 };
 
 
-////////////////////////////////////////////////////////////////////////////////
-/** Moving Layer
- *  Linked list of layer references
- *  Velocity represents one iteration of change (direction & magnitude)
- */
+/** PART 2: DEFINE MOTION LAYERS FOR THE GAME
+ * Velocity is change of direction + magnitude
+*/
 typedef struct MovLayer_s
 {
   Layer *layer;
@@ -121,10 +119,10 @@ typedef struct MovLayer_s
   struct MovLayer_s *next;
 } MovLayer;
 
-/* initial value of {0,0} will be overwritten */
+/* Link */
 MovLayer ml3 = {&upper_shark_layer, {1, 0}, 0};   // Upper Shark Chases Human
 MovLayer ml1 = {&human_body_layer, {1, 0}, &ml3}; // Human Swims Back & Forth
-MovLayer ml4 = {&lower_shark_layer, {1,0}, &ml1};  // Bottom Shark Swims for Prey
+MovLayer ml4 = {&center_shark_layer, {1,0}, &ml1};  // Bottom Shark Swims for Prey
 MovLayer ml0 = {&human_head_layer, {1, 0}, &ml4};
 
 void movLayerDraw(MovLayer *movLayers, Layer *layers)
@@ -190,25 +188,26 @@ void mlAdvance(MovLayer *ml, Region *fence)
         velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
         if (velocity < 0)
         {
-          drawString5x7(22, 55, "JAWS: THE GAME ", COLOR_RED, COLOR_BLACK);
-          //PLAY SOUND
+          
+          // Trigger Buzzer
           //buzzer_set_period(1000);
+
+          drawString5x7(22, 55, "JAWS: THE GAME ", COLOR_RED, COLOR_BLACK);
           newPos.axes[axis] += (2 * velocity);
         }
         if (velocity > 0)
         {
           drawString5x7(17, 100, "PRESS ANY BUTTON ", COLOR_RED, COLOR_BLACK); //CIRCA 1975     
         }
-      } /**< if outside of fence */
-    }   /**< for axis */
+      }
+    }
     ml->layer->posNext = newPos;
-
-  } /**< for ml */
+  }
 }
 
-// System Sets Background Color
-u_int bgColor = COLOR_BLACK; /**< The background color */
-int redrawScreen = 1;                 /**< Boolean for whether screen needs to be redrawn */
+// Set Dark, Christmas-Themed Backgroud Color
+u_int bgColor = COLOR_BLACK;
+int redrawScreen = 1;           // Boolean for redrawing screen
 
 Region fieldFence; /**< fence around playing field  */
 
@@ -237,11 +236,12 @@ void main()
   for (;;)
   {
     while (!redrawScreen)
-    {                      /**< Pause CPU if screen doesn't need updating */
-      //P1OUT &= ~GREEN_LED; /**< Green led off witHo CPU */
-      or_sr(0x10);         /**< CPU OFF */
+    {
+      // Pause CPU if screen doesn't need updating
+      P1OUT &= ~GREEN_LED; // Green LED off
+      or_sr(0x10);         // CPU off
     }
-    //P1OUT |= GREEN_LED; /**< Green led on when CPU on */
+    P1OUT |= GREEN_LED;     // Green LED on when CPU on
     redrawScreen = 0;
 
     // Draw Base Layer
@@ -269,25 +269,23 @@ void wdt_c_handler()
   // static char second_count = 0, decisecond_count = 0;
   // if (++decisecond_count == 25)
   // {
-  //   // Play Sound
 
   //   buzzer_advance_frequency();
   //   decisecond_count = 0;
   // }
 
   static short count = 0;
-  //P1OUT |= GREEN_LED; /**< Green LED on when cpu on */
+  P1OUT |= GREEN_LED; /**< Green LED on when cpu on */
   count++;
   if (count == 15)
   {
-    // Draw Objects on Screen
-
+    // Draw Objects on Screen & Play Sounds
     mlAdvance(&ml1, &fieldFence);
-    //mlAdvance(&ml, &fieldFence);
+
     if (p2sw_read())
       redrawScreen = 1;
     count = 0;
   }
 
-  //P1OUT &= ~GREEN_LED; /**< Green LED off when cpu off */
+  P1OUT &= ~GREEN_LED; /**< Green LED off when cpu off */
 }
