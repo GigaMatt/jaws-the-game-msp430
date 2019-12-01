@@ -72,7 +72,7 @@ Layer lower_shark_layer = {
     // Lower Shark
 
     (AbShape *)&right_arrow,
-    {(screenWidth / 2) +15, (screenHeight / 2)-65}, /**< bit below & right of center +10,+61*/
+    {(screenWidth / 2) +15, (screenHeight / 2)-60}, /**< bit below & right of center +10,+61*/
     {0, 0},
     {0, 0}, /* last & next pos */
     COLOR_GRAY,
@@ -199,7 +199,7 @@ void mlAdvance(MovLayer *ml, Region *fence)
         velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
         if (velocity < 0)
         {
-          drawString5x7(25, 55, "JAWS: THE GAME ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35
+          drawString5x7(23, 55, "JAWS: THE GAME ", COLOR_RED, COLOR_BLACK); //prev 5x7 20, 35
           buzzer_set_period(1000);
           newPos.axes[axis] += (2 * velocity);
         }
