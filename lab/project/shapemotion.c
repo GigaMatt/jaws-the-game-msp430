@@ -119,8 +119,8 @@ typedef struct MovLayer_s
 } MovLayer;
 
 /* Link */
-MovLayer ml3 = {&upper_shark_layer, {1, 0}, 0};   // Upper Shark Chases Human
-MovLayer ml1 = {&human_body_layer, {1, 0}, &ml3}; // Human Swims Back & Forth
+MovLayer ml3 = {&upper_shark_layer, {2, 0}, 0};   // Upper Shark Chases Human
+MovLayer ml1 = {&human_body_layer, {2, 0}, &ml3}; // Human Swims Back & Forth
 MovLayer ml4 = {&center_shark_layer, {1,0}, &ml1};  // Bottom Shark Swims for Prey
 MovLayer ml0 = {&human_head_layer, {1, 0}, &ml4};
 
