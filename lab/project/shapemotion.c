@@ -267,19 +267,19 @@ void wdt_c_handler()
           
 		case 1:
       buzzer_play_sound();
-      updateSharkPosition()
+      updateSharkPosition();
 			break;
 		case 2:
       buzzer_play_sound();
-      updateSharkPosition()
+      updateSharkPosition();
 			break;
 		case 4:
       buzzer_play_sound();
-      updateSharkPosition()
+      updateSharkPosition();
 			break;
 		case 8:
       buzzer_play_sound();
-      updateSharkPosition()
+      updateSharkPosition();
 			break;
 	  }
     mlAdvance(&ml1, &fieldFence);
