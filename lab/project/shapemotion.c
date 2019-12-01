@@ -15,9 +15,6 @@
 #include <abCircle.h>
 #include "buzzer.h"
 #include "libTimer.h"
-#include "led.h"
-#include "switches.h"
-#include "stateMachines.h"
 
 #define GREEN_LED BIT6
 
@@ -29,13 +26,8 @@ int abSlicedRectCheck(const AbRect *rect, const Vec2 *center_position, const Vec
 
   Vec2 relative_position;
   vec2Sub(&relative_position, pixel, center_position);
-  if (relative_position.axes[1] <= 4)
-  {
-    if(relative_position.axes[1] / 2 < relative_position.axes[2])
-    {
-      return 0;
-    }
-  }
+  if (relative_position.axes[1] <= 4 && relative_position.axes[1] / 2 < relative_position.axes[2])
+    return 0;
   else
     return abRectCheck(rect, center_position, pixel);
 }
@@ -46,23 +38,19 @@ int abSlicedArrowCheck(const AbRArrow *shape, const Vec2 *center_position, const
 
   Vec2 relative_position;
   vec2Sub(&relative_position, pixel, center_position);
-  if (relative_position.axes[1] >= -3)
-  {
-    if (relative_position.axes[0] / 2 < relative_position.axes[1])
-    {
-      return 0;
-    }
-  }
+  if (relative_position.axes[1] >= -3 && relative_position.axes[0] / 2 < relative_position.axes[1])//-6
+    return 0;
   else
     return abRArrowCheck(shape, center_position, pixel);
 }
 
 //  Build Objects
-AbRect rectangle_size_10 = {abRectGetBounds, abSlicedRectCheck, {7, 5}};  // 7x5 Rectangle
-AbRArrow right_arrow = {abRArrowGetBounds, abSlicedArrowCheck, 25};
+AbRect rectangle_size_10 = {abRectGetBounds, abSlicedRectCheck, {7, 5}}; /**< 10x10 rectangle */
+AbRArrow right_arrow = {abRArrowGetBounds, abSlicedArrowCheck, 25}; //30
 
-// Define Border Outline
 AbRectOutline boder_outline = {
+    // Define Border Outline
+
     abRectOutlineGetBounds,
     abRectOutlineCheck,
     {screenWidth / 2 - 10, screenHeight / 2 - 15}};
@@ -72,9 +60,9 @@ Layer center_shark_layer = {
     // Center White Shark
 
     (AbShape *)&right_arrow,
-    {(screenWidth / 2)+10, (screenHeight / 2)}, // Positioned right of center of the screen
+    {(screenWidth / 2)+10, (screenHeight / 2)},
     {0, 0},
-    {0, 0},
+    {0, 0}, /* last & next pos */
     COLOR_WHITE,
     0,
 };
@@ -83,41 +71,38 @@ Layer upper_shark_layer = {
     // Upper Hungry Shark
 
     (AbShape *)&right_arrow,
-    {(screenWidth / 2) -25, (screenHeight / 2)-60}, // Positioned in the upper right-hand side of the screen
+    {(screenWidth / 2) -25, (screenHeight / 2)-60},
     {0, 0},
-    {0, 0},
+    {0, 0}, /* last & next pos */
     COLOR_GRAY,
     &center_shark_layer,
 };
 
 Layer border_field_layer = {
     // Border Outline
-
     (AbShape *)&boder_outline,
-    {(screenWidth / 2), (screenHeight / 2)},  // Positioned in the center of the screen
+    {(screenWidth / 2), (screenHeight / 2)}, /**< center */
     {0, 0},
-    {0, 0},
+    {0, 0}, /* last & next pos */
     COLOR_RED,
     &upper_shark_layer};
 
 Layer human_body_layer = {
     // Swimming Human Body
-
     (AbShape *)&rectangle_size_10,
     {(screenWidth / 2), (screenHeight / 2)-73},
     {0, 0},
-    {0, 0},
+    {0, 0}, /* last & next pos */
     COLOR_BROWN,
     &border_field_layer,
 };
 
-Layer base_background_layer = {
-    // Background Layer
-
+Layer human_head_layer = {
+    // Swimming Human Body
     (AbShape *)&rectangle_size_10,
-    {(screenWidth / 2), (screenHeight / 2)},  // Positioned in the center of the screen
+    {(screenWidth / 2), (screenHeight / 2)}, /**< center */
     {0, 0},
-    {0, 0},
+    {0, 0}, /* last & next pos */
     COLOR_BLACK,
     &human_body_layer,
 };
@@ -137,7 +122,7 @@ typedef struct MovLayer_s
 MovLayer ml3 = {&upper_shark_layer, {1, 0}, 0};   // Upper Shark Chases Human
 MovLayer ml1 = {&human_body_layer, {1, 0}, &ml3}; // Human Swims Back & Forth
 MovLayer ml4 = {&center_shark_layer, {1,0}, &ml1};  // Bottom Shark Swims for Prey
-MovLayer ml0 = {&base_background_layer, {1, 0}, &ml4};
+MovLayer ml0 = {&human_head_layer, {1, 0}, &ml4};
 
 void movLayerDraw(MovLayer *movLayers, Layer *layers)
 {
@@ -154,9 +139,7 @@ void movLayerDraw(MovLayer *movLayers, Layer *layers)
   or_sr(8); /**< disable interrupts (GIE on) */
 
   for (movLayer = movLayers; movLayer; movLayer = movLayer->next)
-  {
-    // For each moving layer
-
+  { /* for each moving layer */
     Region bounds;
     layerGetBounds(movLayer->layer, &bounds);
     lcd_setArea(bounds.topLeft.axes[0], bounds.topLeft.axes[1],
@@ -170,29 +153,24 @@ void movLayerDraw(MovLayer *movLayers, Layer *layers)
         Layer *probeLayer;
         for (probeLayer = layers; probeLayer;
              probeLayer = probeLayer->next)
-        {
-          // Probe all layers in order
+        { /* probe all layers, in order */
           if (abShapeCheck(probeLayer->abShape, &probeLayer->pos, &pixelPos))
           {
             color = probeLayer->color;
             break;
-          }
-        }
-        // Repaint with the background color
+          } /* if probe check */
+        }   // for checking all layers at col, row
         lcd_writeColor(color);
-      }
-    }
-  } 
+      } // for col
+    }   // for row
+  }     // for moving layer being updated
 }
 
+//Region fence = {{10,30}, {SHORT_EDGE_PIXELS-10, LONG_EDGE_PIXELS-10}}; /**< Create a fence region */
 
-/** PART 3: MOVE OBJECTS
- * Use MovLayer as defined before
-*/
+/* SYSTEM MOVES THE SHARKS WITHIN THE DEFINED FENCE */
 void mlAdvance(MovLayer *ml, Region *fence)
 {
-  // Move Object(s) within the defined fence
-
   Vec2 newPos;
   u_char axis;
   Region shapeBoundary;
@@ -226,7 +204,7 @@ void mlAdvance(MovLayer *ml, Region *fence)
   }
 }
 
-// Set Deep-Ocean-Themed Backgroud Color
+// Set Dark, Christmas-Themed Backgroud Color
 u_int bgColor = COLOR_BLACK;
 int redrawScreen = 1;           // Boolean for redrawing screen
 
@@ -237,24 +215,22 @@ void main()
   P1DIR |= GREEN_LED; /**< Green led on when CPU on */
   P1OUT |= GREEN_LED;
 
-  // Timer
-  configureClocks();  // Start Lib Timer
-
-  // Initialize
+  configureClocks();
   lcd_init();
   shapeInit();
   p2sw_init(1);
-  shapeInit();
-  //switch_init();  // Setup Switches
-  buzzer_init();  // Call Speakers
-  //led_init();     // Call LEDs
-  layerInit(&human_body_layer);
 
+  shapeInit();
+
+  layerInit(&human_body_layer);
   layerDraw(&human_body_layer);
+
+  buzzer_init();
+
   layerGetBounds(&border_field_layer, &fieldFence);
 
-  enableWDTInterrupts();  // Enable Watchdog Timer
-  or_sr(0x8);             // Power off CPU
+  enableWDTInterrupts(); /**< enable periodic interrupt */
+  or_sr(0x8);            /**< GIE (enable interrupts) */
 
   for (;;)
   {
@@ -268,7 +244,7 @@ void main()
     redrawScreen = 0;
 
     // Draw Base Layer
-    movLayerDraw(&ml0, &base_background_layer);
+    movLayerDraw(&ml0, &human_head_layer);
   }
 }
 
