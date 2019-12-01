@@ -357,7 +357,7 @@ void updateSharkPosition()
   }
 
   // Change according to new velocity
-  changeSharkDirection(&x_direction, &y_direction, direction);
+  //changeSharkDirection(&x_direction, &y_direction, direction);
   updateSharkPosition();
   shark_move_layer->velocity.axes[0] = x_direction; // Change x-directional velocity
   shark_move_layer->velocity.axes[1] = y_direction; // Change y-directional velocity
