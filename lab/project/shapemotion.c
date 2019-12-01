@@ -93,7 +93,7 @@ Layer human_body_layer = {
     {(screenWidth / 2), (screenHeight / 2)-73},
     {0, 0},
     {0, 0}, /* last & next pos */
-    COLOR_BEIGE,
+    COLOR_BROWN,
     &border_field_layer,
 };
 
